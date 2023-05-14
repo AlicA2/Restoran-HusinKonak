@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "RestoranApp_HusinKonak": {
+    "HusinKonak": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

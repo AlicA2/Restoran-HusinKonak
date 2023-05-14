@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using RestoranApp_HusinKonak.Data;
+using HusinKonak.Data;
+using HusinKonak.Services;
+using HusinKonak.Services.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,8 @@ builder.Services.AddDbContext<RestaurantDBContext>(options =>
 
 });
 
+
+builder.Services.AddTransient<IAdminService, AdminService>();
 
 var app = builder.Build();
 

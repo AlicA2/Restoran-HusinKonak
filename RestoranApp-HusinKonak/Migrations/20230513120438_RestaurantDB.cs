@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace RestoranApp_HusinKonak.Migrations
+namespace HusinKonak.Migrations
 {
     /// <inheritdoc />
     public partial class RestaurantDB : Migration

@@ -3,10 +3,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Restoran.Model;
-using RestoranApp_HusinKonak.Data;
+using HusinKonak.Data;
 
-namespace RestoranApp_HusinKonak.Controllers
+namespace HusinKonak.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

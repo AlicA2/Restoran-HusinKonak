@@ -1,36 +1,33 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Restoran.Model;
-using RestoranApp_HusinKonak.Data;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using HusinKonak.Data;
+using HusinKonak.Services.Interface;
 
-namespace RestoranApp_HusinKonak.Controllers
+namespace HusinKonak.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     public class AdminController : ControllerBase
     {
-        private readonly RestaurantDBContext _context;
+        private readonly IAdminService _adminService;
 
-        public AdminController(RestaurantDBContext context)
+        public AdminController(IAdminService adminService)
         {
-            _context = context;
+            _adminService = adminService;
         }
 
         // GET: api/Admin
         [HttpGet]
         public async Task<IActionResult> GetAdmins()
         {
-            return this.Ok(await _context.Admins.ToListAsync());
+            var admins = await _adminService.GetAllAdmins();
+            return this.Ok(admins);
         }
 
         // GET: api/Admin/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Admin>> GetAdmin(int id)
         {
-            var admin = await _context.Admins.FindAsync(id);
+            var admin = await _adminService.GetAdminById(id);
 
             if (admin == null)
             {
@@ -49,23 +46,7 @@ namespace RestoranApp_HusinKonak.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(admin).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AdminExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _adminService.UpdateAdmin(id,admin);
 
             return NoContent();
         }
@@ -74,8 +55,7 @@ namespace RestoranApp_HusinKonak.Controllers
         [HttpPost]
         public async Task<ActionResult<Admin>> PostAdmin(Admin admin)
         {
-            _context.Admins.Add(admin);
-            await _context.SaveChangesAsync();
+            await _adminService.AddAdmin(admin);
 
             return CreatedAtAction("GetAdmin", new { id = admin.AdminId }, admin);
         }
@@ -84,21 +64,15 @@ namespace RestoranApp_HusinKonak.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAdmin(int id)
         {
-            var admin = await _context.Admins.FindAsync(id);
+            var admin = await _adminService.GetAdminById(id);
             if (admin == null)
             {
                 return NotFound();
             }
 
-            _context.Admins.Remove(admin);
-            await _context.SaveChangesAsync();
+            await _adminService.DeleteAdmin(admin.AdminId);
 
             return NoContent();
-        }
-
-        private bool AdminExists(int id)
-        {
-            return _context.Admins.Any(e => e.AdminId == id);
         }
     }
 }

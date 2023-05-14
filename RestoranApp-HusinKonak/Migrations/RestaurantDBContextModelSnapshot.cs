@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using RestoranApp_HusinKonak.Data;
+using HusinKonak.Data;
 
 #nullable disable
 
-namespace RestoranApp_HusinKonak.Migrations
+namespace HusinKonak.Migrations
 {
     [DbContext(typeof(RestaurantDBContext))]
     partial class RestaurantDBContextModelSnapshot : ModelSnapshot
@@ -37,7 +37,7 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.ToTable("CustomerOrder");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Admin", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Admin", b =>
                 {
                     b.Property<int>("AdminId")
                         .ValueGeneratedOnAdd()
@@ -62,7 +62,7 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.ToTable("Admins");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Customer", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Customer", b =>
                 {
                     b.Property<int>("CustomerId")
                         .ValueGeneratedOnAdd()
@@ -86,7 +86,7 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.CustomerReward", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.CustomerReward", b =>
                 {
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
@@ -101,7 +101,7 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.ToTable("CustomerReward");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Delivery", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Delivery", b =>
                 {
                     b.Property<int>("DeliveryId")
                         .ValueGeneratedOnAdd()
@@ -127,7 +127,7 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.ToTable("Deliveries");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Discount", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Discount", b =>
                 {
                     b.Property<int>("DiscountId")
                         .ValueGeneratedOnAdd()
@@ -152,7 +152,7 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.ToTable("Discounts");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.DiscountMenuItem", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.DiscountMenuItem", b =>
                 {
                     b.Property<int>("DiscountID")
                         .HasColumnType("int");
@@ -167,7 +167,7 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.ToTable("DiscountMenuItem");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Employee", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Employee", b =>
                 {
                     b.Property<int>("EmployeeId")
                         .ValueGeneratedOnAdd()
@@ -197,7 +197,7 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.ToTable("Employees");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.EmployeeEvent", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.EmployeeEvent", b =>
                 {
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
@@ -212,7 +212,7 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.ToTable("EmployeeEvent");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Event", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Event", b =>
                 {
                     b.Property<int>("EventId")
                         .ValueGeneratedOnAdd()
@@ -236,7 +236,7 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.ToTable("Events");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Inventory", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Inventory", b =>
                 {
                     b.Property<int>("InventoryId")
                         .ValueGeneratedOnAdd()
@@ -259,7 +259,7 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.ToTable("Inventories");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.MenuItem", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.MenuItem", b =>
                 {
                     b.Property<int>("MenuItemId")
                         .ValueGeneratedOnAdd()
@@ -288,7 +288,7 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.ToTable("MenuItems");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Order", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Order", b =>
                 {
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
@@ -307,7 +307,7 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.OrderItem", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.OrderItem", b =>
                 {
                     b.Property<int>("OrderItemId")
                         .ValueGeneratedOnAdd()
@@ -335,7 +335,7 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.ToTable("OrderItems");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.OrderItemMenuItem", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.OrderItemMenuItem", b =>
                 {
                     b.Property<int>("MenuItemId")
                         .HasColumnType("int");
@@ -350,7 +350,7 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.ToTable("OrderItemMenuItem");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.OrderItemReview", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.OrderItemReview", b =>
                 {
                     b.Property<int>("OrderItemId")
                         .HasColumnType("int");
@@ -368,7 +368,7 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.ToTable("OrderItemReview");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Payment", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Payment", b =>
                 {
                     b.Property<int>("PaymentId")
                         .ValueGeneratedOnAdd()
@@ -398,7 +398,7 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.ToTable("Payments");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Reservation", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Reservation", b =>
                 {
                     b.Property<int>("ReservationId")
                         .ValueGeneratedOnAdd()
@@ -422,7 +422,7 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.ToTable("Reservations");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Review", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Review", b =>
                 {
                     b.Property<int>("ReviewId")
                         .ValueGeneratedOnAdd()
@@ -447,7 +447,7 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.ToTable("Reviews");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Reward", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Reward", b =>
                 {
                     b.Property<int>("RewardId")
                         .ValueGeneratedOnAdd()
@@ -475,7 +475,7 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.ToTable("Rewards");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Table", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Table", b =>
                 {
                     b.Property<int>("TableId")
                         .ValueGeneratedOnAdd()
@@ -495,7 +495,7 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.ToTable("Tables");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.TableReservation", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.TableReservation", b =>
                 {
                     b.Property<int>("TableId")
                         .HasColumnType("int");
@@ -510,7 +510,7 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.ToTable("TableReservation");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Transaction", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Transaction", b =>
                 {
                     b.Property<int>("TransactionId")
                         .ValueGeneratedOnAdd()
@@ -531,28 +531,28 @@ namespace RestoranApp_HusinKonak.Migrations
 
             modelBuilder.Entity("CustomerOrder", b =>
                 {
-                    b.HasOne("RestoranApp_HusinKonak.Classes_for_Restaurant.Customer", null)
+                    b.HasOne("HusinKonak.Classes_for_Restaurant.Customer", null)
                         .WithMany()
                         .HasForeignKey("CustomersCustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RestoranApp_HusinKonak.Classes_for_Restaurant.Order", null)
+                    b.HasOne("HusinKonak.Classes_for_Restaurant.Order", null)
                         .WithMany()
                         .HasForeignKey("OrdersOrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.CustomerReward", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.CustomerReward", b =>
                 {
-                    b.HasOne("RestoranApp_HusinKonak.Classes_for_Restaurant.Customer", "Customer")
+                    b.HasOne("HusinKonak.Classes_for_Restaurant.Customer", "Customer")
                         .WithMany("CustomerRewards")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RestoranApp_HusinKonak.Classes_for_Restaurant.Reward", "Reward")
+                    b.HasOne("HusinKonak.Classes_for_Restaurant.Reward", "Reward")
                         .WithMany("CustomerRewards")
                         .HasForeignKey("RewardId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -563,9 +563,9 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.Navigation("Reward");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Discount", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Discount", b =>
                 {
-                    b.HasOne("RestoranApp_HusinKonak.Classes_for_Restaurant.Order", "Order")
+                    b.HasOne("HusinKonak.Classes_for_Restaurant.Order", "Order")
                         .WithMany()
                         .HasForeignKey("OrderID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -574,15 +574,15 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.Navigation("Order");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.DiscountMenuItem", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.DiscountMenuItem", b =>
                 {
-                    b.HasOne("RestoranApp_HusinKonak.Classes_for_Restaurant.Discount", "Discount")
+                    b.HasOne("HusinKonak.Classes_for_Restaurant.Discount", "Discount")
                         .WithMany("DiscountMenuItems")
                         .HasForeignKey("DiscountID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RestoranApp_HusinKonak.Classes_for_Restaurant.MenuItem", "MenuItem")
+                    b.HasOne("HusinKonak.Classes_for_Restaurant.MenuItem", "MenuItem")
                         .WithMany("DiscountMenuItems")
                         .HasForeignKey("MenuItemID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -593,9 +593,9 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.Navigation("MenuItem");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Employee", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Employee", b =>
                 {
-                    b.HasOne("RestoranApp_HusinKonak.Classes_for_Restaurant.Admin", "Admin")
+                    b.HasOne("HusinKonak.Classes_for_Restaurant.Admin", "Admin")
                         .WithMany("Employees")
                         .HasForeignKey("AdminId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -604,15 +604,15 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.Navigation("Admin");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.EmployeeEvent", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.EmployeeEvent", b =>
                 {
-                    b.HasOne("RestoranApp_HusinKonak.Classes_for_Restaurant.Employee", "Employee")
+                    b.HasOne("HusinKonak.Classes_for_Restaurant.Employee", "Employee")
                         .WithMany("EmployeeEvents")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RestoranApp_HusinKonak.Classes_for_Restaurant.Event", "Event")
+                    b.HasOne("HusinKonak.Classes_for_Restaurant.Event", "Event")
                         .WithMany("EmployeeEvents")
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -623,9 +623,9 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.Navigation("Event");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.MenuItem", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.MenuItem", b =>
                 {
-                    b.HasOne("RestoranApp_HusinKonak.Classes_for_Restaurant.Inventory", "Inventory")
+                    b.HasOne("HusinKonak.Classes_for_Restaurant.Inventory", "Inventory")
                         .WithMany("MenuItems")
                         .HasForeignKey("InventoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -634,17 +634,17 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.Navigation("Inventory");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Order", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Order", b =>
                 {
-                    b.HasOne("RestoranApp_HusinKonak.Classes_for_Restaurant.Delivery", "Delivery")
+                    b.HasOne("HusinKonak.Classes_for_Restaurant.Delivery", "Delivery")
                         .WithOne("Order")
-                        .HasForeignKey("RestoranApp_HusinKonak.Classes_for_Restaurant.Order", "OrderId")
+                        .HasForeignKey("HusinKonak.Classes_for_Restaurant.Order", "OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RestoranApp_HusinKonak.Classes_for_Restaurant.Table", "Table")
+                    b.HasOne("HusinKonak.Classes_for_Restaurant.Table", "Table")
                         .WithOne("Order")
-                        .HasForeignKey("RestoranApp_HusinKonak.Classes_for_Restaurant.Order", "TableId")
+                        .HasForeignKey("HusinKonak.Classes_for_Restaurant.Order", "TableId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -653,24 +653,24 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.Navigation("Table");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.OrderItem", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.OrderItem", b =>
                 {
-                    b.HasOne("RestoranApp_HusinKonak.Classes_for_Restaurant.Order", null)
+                    b.HasOne("HusinKonak.Classes_for_Restaurant.Order", null)
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.OrderItemMenuItem", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.OrderItemMenuItem", b =>
                 {
-                    b.HasOne("RestoranApp_HusinKonak.Classes_for_Restaurant.MenuItem", "MenuItem")
+                    b.HasOne("HusinKonak.Classes_for_Restaurant.MenuItem", "MenuItem")
                         .WithMany("OrderItemMenuItems")
                         .HasForeignKey("MenuItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RestoranApp_HusinKonak.Classes_for_Restaurant.OrderItem", "OrderItem")
+                    b.HasOne("HusinKonak.Classes_for_Restaurant.OrderItem", "OrderItem")
                         .WithMany("OrderItemMenuItems")
                         .HasForeignKey("OrderItemId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -681,15 +681,15 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.Navigation("OrderItem");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.OrderItemReview", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.OrderItemReview", b =>
                 {
-                    b.HasOne("RestoranApp_HusinKonak.Classes_for_Restaurant.OrderItem", "OrderItem")
+                    b.HasOne("HusinKonak.Classes_for_Restaurant.OrderItem", "OrderItem")
                         .WithMany("OrderItemReviews")
                         .HasForeignKey("OrderItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RestoranApp_HusinKonak.Classes_for_Restaurant.Review", "Review")
+                    b.HasOne("HusinKonak.Classes_for_Restaurant.Review", "Review")
                         .WithMany("OrderItemReviews")
                         .HasForeignKey("ReviewId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -700,15 +700,15 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.Navigation("Review");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Payment", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Payment", b =>
                 {
-                    b.HasOne("RestoranApp_HusinKonak.Classes_for_Restaurant.Order", "Order")
+                    b.HasOne("HusinKonak.Classes_for_Restaurant.Order", "Order")
                         .WithMany("Payments")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RestoranApp_HusinKonak.Classes_for_Restaurant.Transaction", "Transaction")
+                    b.HasOne("HusinKonak.Classes_for_Restaurant.Transaction", "Transaction")
                         .WithMany("Payments")
                         .HasForeignKey("TransactionId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -719,9 +719,9 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.Navigation("Transaction");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Reservation", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Reservation", b =>
                 {
-                    b.HasOne("RestoranApp_HusinKonak.Classes_for_Restaurant.Customer", "Customer")
+                    b.HasOne("HusinKonak.Classes_for_Restaurant.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -730,9 +730,9 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Review", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Review", b =>
                 {
-                    b.HasOne("RestoranApp_HusinKonak.Classes_for_Restaurant.Customer", "Customer")
+                    b.HasOne("HusinKonak.Classes_for_Restaurant.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -741,9 +741,9 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Reward", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Reward", b =>
                 {
-                    b.HasOne("RestoranApp_HusinKonak.Classes_for_Restaurant.Employee", "Employee")
+                    b.HasOne("HusinKonak.Classes_for_Restaurant.Employee", "Employee")
                         .WithMany()
                         .HasForeignKey("EmployeeID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -752,15 +752,15 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.Navigation("Employee");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.TableReservation", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.TableReservation", b =>
                 {
-                    b.HasOne("RestoranApp_HusinKonak.Classes_for_Restaurant.Reservation", "Reservation")
+                    b.HasOne("HusinKonak.Classes_for_Restaurant.Reservation", "Reservation")
                         .WithMany("TableReservations")
                         .HasForeignKey("ReservationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RestoranApp_HusinKonak.Classes_for_Restaurant.Table", "Table")
+                    b.HasOne("HusinKonak.Classes_for_Restaurant.Table", "Table")
                         .WithMany("TableReservations")
                         .HasForeignKey("TableId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -771,79 +771,79 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.Navigation("Table");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Admin", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Admin", b =>
                 {
                     b.Navigation("Employees");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Customer", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Customer", b =>
                 {
                     b.Navigation("CustomerRewards");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Delivery", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Delivery", b =>
                 {
                     b.Navigation("Order")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Discount", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Discount", b =>
                 {
                     b.Navigation("DiscountMenuItems");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Employee", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Employee", b =>
                 {
                     b.Navigation("EmployeeEvents");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Event", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Event", b =>
                 {
                     b.Navigation("EmployeeEvents");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Inventory", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Inventory", b =>
                 {
                     b.Navigation("MenuItems");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.MenuItem", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.MenuItem", b =>
                 {
                     b.Navigation("DiscountMenuItems");
 
                     b.Navigation("OrderItemMenuItems");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Order", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Order", b =>
                 {
                     b.Navigation("OrderItems");
 
                     b.Navigation("Payments");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.OrderItem", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.OrderItem", b =>
                 {
                     b.Navigation("OrderItemMenuItems");
 
                     b.Navigation("OrderItemReviews");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Reservation", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Reservation", b =>
                 {
                     b.Navigation("TableReservations");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Review", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Review", b =>
                 {
                     b.Navigation("OrderItemReviews");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Reward", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Reward", b =>
                 {
                     b.Navigation("CustomerRewards");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Table", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Table", b =>
                 {
                     b.Navigation("Order")
                         .IsRequired();
@@ -851,7 +851,7 @@ namespace RestoranApp_HusinKonak.Migrations
                     b.Navigation("TableReservations");
                 });
 
-            modelBuilder.Entity("RestoranApp_HusinKonak.Classes_for_Restaurant.Transaction", b =>
+            modelBuilder.Entity("HusinKonak.Classes_for_Restaurant.Transaction", b =>
                 {
                     b.Navigation("Payments");
                 });
