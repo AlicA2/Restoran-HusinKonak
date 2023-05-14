@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using RestoranApp_HusinKonak.Data;
-using RestoranApp_HusinKonak.Classes_for_Restaurant;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Restoran.Model;
 
 namespace RestoranApp_HusinKonak.Controllers
 {
@@ -21,9 +21,9 @@ namespace RestoranApp_HusinKonak.Controllers
 
         // GET: api/Employee
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
+        public async Task<IActionResult> GetEmployees()
         {
-            return await _context.Employees.ToListAsync();
+            return this.Ok(await _context.Employees.ToListAsync());
         }
 
         // GET: api/Employee/5

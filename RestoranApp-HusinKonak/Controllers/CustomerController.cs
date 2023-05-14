@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RestoranApp_HusinKonak.Data;
-using RestoranApp_HusinKonak.Classes_for_Restaurant;
+using Restoran.Model;
 
 namespace RestoranApp_HusinKonak.Controllers
 {
@@ -18,9 +18,9 @@ namespace RestoranApp_HusinKonak.Controllers
 
         // GET: api/customers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers() 
+        public async Task<IActionResult> GetCustomers()
         {
-            return await _context.Customers.ToListAsync();
+            return this.Ok(await _context.Customers.ToListAsync());
         }
 
         // GET: api/customers/5

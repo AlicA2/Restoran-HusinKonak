@@ -1,5 +1,6 @@
-﻿namespace RestoranApp_HusinKonak.Classes_for_Restaurant
-{
+﻿namespace Restoran.Model 
+{ 
+
     public class Transaction
     {
         public int TransactionId { get; set; }

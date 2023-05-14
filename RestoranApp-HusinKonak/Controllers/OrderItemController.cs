@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RestoranApp_HusinKonak.Classes_for_Restaurant;
+using Restoran.Model;
 using RestoranApp_HusinKonak.Data;
 
 namespace RestoranApp_HusinKonak.Controllers
@@ -21,9 +21,9 @@ namespace RestoranApp_HusinKonak.Controllers
 
         // GET: api/OrderItem
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<OrderItem>>> GetOrderItems()
+        public async Task<IActionResult> GetOrderItems()
         {
-            return await _context.OrderItems.ToListAsync();
+            return this.Ok(await _context.OrderItems.ToListAsync());
         }
 
         // GET: api/OrderItem/5

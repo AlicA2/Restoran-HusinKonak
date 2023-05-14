@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RestoranApp_HusinKonak.Classes_for_Restaurant;
+using Restoran.Model;
 
 namespace RestoranApp_HusinKonak.Data
 {

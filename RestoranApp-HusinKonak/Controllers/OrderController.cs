@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RestoranApp_HusinKonak.Classes_for_Restaurant;
+using Restoran.Model;
 using RestoranApp_HusinKonak.Data;
 
 namespace RestoranApp_HusinKonak.Controllers

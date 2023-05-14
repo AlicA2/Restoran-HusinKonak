@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RestoranApp_HusinKonak.Data;
-using RestoranApp_HusinKonak.Classes_for_Restaurant;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Restoran.Model;
 
 namespace RestoranApp_HusinKonak.Controllers
 {
@@ -21,9 +21,9 @@ namespace RestoranApp_HusinKonak.Controllers
 
         // GET: api/Events
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Event>>> GetEvents()
+        public async Task<IActionResult> GetEvents()
         {
-            return await _context.Events.ToListAsync();
+            return this.Ok(await _context.Events.ToListAsync());
         }
 
         // GET: api/Events/5
@@ -72,12 +72,12 @@ namespace RestoranApp_HusinKonak.Controllers
 
         // POST: api/Events
         [HttpPost]
-        public async Task<ActionResult<Event>> PostEvent(Event @event)
+        public async Task<ActionResult<Event>> PostEvent(Event data)
         {
-            _context.Events.Add(@event);
+            _context.Events.Add(data);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetEvent", new { id = @event.EventId }, @event);
+            return CreatedAtAction("GetEvent", new { id = data.EventId }, data);
         }
 
         // DELETE: api/Events/5

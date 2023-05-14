@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RestoranApp_HusinKonak.Classes_for_Restaurant
+namespace Restoran.Model
 {
     public class OrderItemReview
     {

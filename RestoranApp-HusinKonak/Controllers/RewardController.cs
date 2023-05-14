@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RestoranApp_HusinKonak.Classes_for_Restaurant;
+using Restoran.Model;
 using RestoranApp_HusinKonak.Data;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +21,9 @@ namespace RestoranApp_HusinKonak.Controllers
 
         // GET: api/rewards
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Reward>>> GetRewards()
+        public async Task<IActionResult> GetRewards()
         {
-            return await _context.Rewards.ToListAsync();
+            return this.Ok(await _context.Rewards.ToListAsync());
         }
 
         // GET: api/rewards/5

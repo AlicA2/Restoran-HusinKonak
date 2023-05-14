@@ -1,15 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Restoran.Model;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RestoranApp_HusinKonak.Data;
-using RestoranApp_HusinKonak.Classes_for_Restaurant;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using RestoranApp_HusinKonak.Data;
 
-namespace RestoranApp_HusinKonak.Controllers
+namespace Restoran.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class TransactionsController : ControllerBase
     {
         private readonly RestaurantDBContext _context;
@@ -19,18 +20,16 @@ namespace RestoranApp_HusinKonak.Controllers
             _context = context;
         }
 
-        // GET: api/Transactions
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Transaction>>> GetTransactions()
         {
-            return await _context.Transactions.ToListAsync();
+            return await _context.Transactions.Include(t => t.Payments).ToListAsync();
         }
 
-        // GET: api/Transactions/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Transaction>> GetTransaction(int id)
         {
-            var transaction = await _context.Transactions.FindAsync(id);
+            var transaction = await _context.Transactions.Include(t => t.Payments).FirstOrDefaultAsync(t => t.TransactionId == id);
 
             if (transaction == null)
             {
@@ -40,7 +39,15 @@ namespace RestoranApp_HusinKonak.Controllers
             return transaction;
         }
 
-        // PUT: api/Transactions/5
+        [HttpPost]
+        public async Task<ActionResult<Transaction>> PostTransaction(Transaction transaction)
+        {
+            _context.Transactions.Add(transaction);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetTransaction), new { id = transaction.TransactionId }, transaction);
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTransaction(int id, Transaction transaction)
         {
@@ -70,17 +77,6 @@ namespace RestoranApp_HusinKonak.Controllers
             return NoContent();
         }
 
-        // POST: api/Transactions
-        [HttpPost]
-        public async Task<ActionResult<Transaction>> PostTransaction(Transaction transaction)
-        {
-            _context.Transactions.Add(transaction);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetTransaction", new { id = transaction.TransactionId }, transaction);
-        }
-
-        // DELETE: api/Transactions/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTransaction(int id)
         {
@@ -98,7 +94,7 @@ namespace RestoranApp_HusinKonak.Controllers
 
         private bool TransactionExists(int id)
         {
-            return _context.Transactions.Any(e => e.TransactionId == id);
+            return _context.Transactions.Any(t => t.TransactionId == id);
         }
     }
 }

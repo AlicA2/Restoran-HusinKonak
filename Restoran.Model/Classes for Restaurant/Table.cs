@@ -1,5 +1,5 @@
-﻿namespace RestoranApp_HusinKonak.Classes_for_Restaurant
-{
+﻿namespace Restoran.Model
+{ 
     public class Table
     {
         public int TableId { get; set; }
