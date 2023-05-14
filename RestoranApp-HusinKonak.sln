@@ -5,7 +5,9 @@ VisualStudioVersion = 17.1.32407.343
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestoranApp-HusinKonak", "RestoranApp-HusinKonak\RestoranApp-HusinKonak.csproj", "{D4D07BB9-B8D6-4E0A-B0A1-3EF98BC89744}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restoran.Model", "Restoran.Model\Restoran.Model.csproj", "{EEDC8A30-6780-4B03-8734-F8554ECF943E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Restoran.Model", "Restoran.Model\Restoran.Model.csproj", "{EEDC8A30-6780-4B03-8734-F8554ECF943E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controllers.Services", "Controllers.Services\Controllers.Services.csproj", "{144B9C47-B3A5-4E07-AF43-8CAB21C9264E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{EEDC8A30-6780-4B03-8734-F8554ECF943E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEDC8A30-6780-4B03-8734-F8554ECF943E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EEDC8A30-6780-4B03-8734-F8554ECF943E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{144B9C47-B3A5-4E07-AF43-8CAB21C9264E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{144B9C47-B3A5-4E07-AF43-8CAB21C9264E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{144B9C47-B3A5-4E07-AF43-8CAB21C9264E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{144B9C47-B3A5-4E07-AF43-8CAB21C9264E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
