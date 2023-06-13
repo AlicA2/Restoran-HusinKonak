@@ -3,6 +3,7 @@ using HusinKonak.Data;
 using HusinKonak.Services.Interface;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using RestoranApp_HusinKonak.ViewModels;
 
 namespace HusinKonak.Controllers
 {
@@ -20,13 +21,13 @@ namespace HusinKonak.Controllers
         }
 
         [HttpPost("authenticate")]
-        public async Task<IActionResult> Authenticate([FromBody] Admin adminObj)
+        public async Task<IActionResult> Authenticate([FromBody] LoginModel adminObj)
         {
             if (adminObj == null)
                 return BadRequest();
 
             var user = await _dbContext.Admins
-                .FirstOrDefaultAsync(x => x.Name == adminObj.Name && x.Password == adminObj.Password);
+                .FirstOrDefaultAsync(x => x.Name == adminObj.Name && x.Password == adminObj.Password );
 
             if (user == null)
                 return NotFound(new { Message = "User not found!" });
