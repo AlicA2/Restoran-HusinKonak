@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using HusinKonak.Data.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace HusinKonak.Data
 {
@@ -20,6 +21,7 @@ namespace HusinKonak.Data
         public DbSet<Reward> Rewards { get; set; }
         public DbSet<Table> Tables { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
 
         public RestaurantDBContext(DbContextOptions<RestaurantDBContext> options) : base(options)
         {
