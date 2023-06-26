@@ -4,6 +4,7 @@ using HusinKonak.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HusinKonak.Data.Migrations
 {
     [DbContext(typeof(RestaurantDBContext))]
-    partial class RestaurantDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230625194346_tesst")]
+    partial class tesst
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -287,31 +290,6 @@ namespace HusinKonak.Data.Migrations
                     b.HasIndex("InventoryId");
 
                     b.ToTable("MenuItems");
-                });
-
-            modelBuilder.Entity("HusinKonak.Data.Models.Contact", b =>
-                {
-                    b.Property<int>("ContactID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ContactID"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Sadrzaj")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ContactID");
-
-                    b.ToTable("Contacts");
                 });
 
             modelBuilder.Entity("HusinKonak.Data.Order", b =>
