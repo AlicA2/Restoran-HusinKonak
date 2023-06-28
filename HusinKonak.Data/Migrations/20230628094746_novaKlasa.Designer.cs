@@ -4,6 +4,7 @@ using HusinKonak.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HusinKonak.Data.Migrations
 {
     [DbContext(typeof(RestaurantDBContext))]
-    partial class RestaurantDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230628094746_novaKlasa")]
+    partial class novaKlasa
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +24,21 @@ namespace HusinKonak.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("CustomerOrder", b =>
+                {
+                    b.Property<int>("CustomersCustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrdersOrderId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CustomersCustomerId", "OrdersOrderId");
+
+                    b.HasIndex("OrdersOrderId");
+
+                    b.ToTable("CustomerOrder");
+                });
 
             modelBuilder.Entity("HusinKonak.Data.Admin", b =>
                 {
@@ -55,24 +73,18 @@ namespace HusinKonak.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerId"));
 
-                    b.Property<string>("Email")
+                    b.Property<string>("ContactInfo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsLoyaltyMember")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("CustomerId");
-
-                    b.HasIndex("OrderId");
 
                     b.ToTable("Customers");
                 });
@@ -302,7 +314,7 @@ namespace HusinKonak.Data.Migrations
 
                     b.HasKey("ContactID");
 
-                    b.ToTable("Contact");
+                    b.ToTable("Contacts");
                 });
 
             modelBuilder.Entity("HusinKonak.Data.Order", b =>
@@ -549,11 +561,17 @@ namespace HusinKonak.Data.Migrations
                     b.ToTable("Transactions");
                 });
 
-            modelBuilder.Entity("HusinKonak.Data.Customer", b =>
+            modelBuilder.Entity("CustomerOrder", b =>
                 {
+                    b.HasOne("HusinKonak.Data.Customer", null)
+                        .WithMany()
+                        .HasForeignKey("CustomersCustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("HusinKonak.Data.Order", null)
-                        .WithMany("Customers")
-                        .HasForeignKey("OrderId")
+                        .WithMany()
+                        .HasForeignKey("OrdersOrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -561,7 +579,7 @@ namespace HusinKonak.Data.Migrations
             modelBuilder.Entity("HusinKonak.Data.CustomerReward", b =>
                 {
                     b.HasOne("HusinKonak.Data.Customer", "Customer")
-                        .WithMany()
+                        .WithMany("CustomerRewards")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -785,6 +803,11 @@ namespace HusinKonak.Data.Migrations
                     b.Navigation("Table");
                 });
 
+            modelBuilder.Entity("HusinKonak.Data.Customer", b =>
+                {
+                    b.Navigation("CustomerRewards");
+                });
+
             modelBuilder.Entity("HusinKonak.Data.Delivery", b =>
                 {
                     b.Navigation("Order")
@@ -820,8 +843,6 @@ namespace HusinKonak.Data.Migrations
 
             modelBuilder.Entity("HusinKonak.Data.Order", b =>
                 {
-                    b.Navigation("Customers");
-
                     b.Navigation("OrderItems");
 
                     b.Navigation("Payments");

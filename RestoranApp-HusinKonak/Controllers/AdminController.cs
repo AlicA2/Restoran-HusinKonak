@@ -35,17 +35,17 @@ namespace HusinKonak.Controllers
             return Ok(new { Message = "Login success" });
         }
 
-        [HttpPost("register")]
-        public async Task<IActionResult> RegisterUser([FromBody] Admin adminObj)
-        {
-            if (adminObj == null)
-                return BadRequest();
+        //[HttpPost("register")]
+        //public async Task<IActionResult> RegisterUser([FromBody] Admin adminObj)
+        //{
+        //    if (adminObj == null)
+        //        return BadRequest();
 
-            await _dbContext.Admins.AddAsync(adminObj);
-            await _dbContext.SaveChangesAsync();
+        //    await _dbContext.Admins.AddAsync(adminObj);
+        //    await _dbContext.SaveChangesAsync();
 
-            return Ok(new { Message = "User Registered!" });
-        }
+        //    return Ok(new { Message = "User Registered!" });
+        //}
 
         [HttpGet]
         public async Task<IActionResult> GetAdmins()

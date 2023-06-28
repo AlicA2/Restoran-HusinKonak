@@ -19,40 +19,38 @@ namespace HusinKonak.Controllers
 
             // GET: api/orders
             [HttpGet]
-            public ActionResult<IEnumerable<Order>> GetOrders()
+        public ActionResult<IEnumerable<Order>> GetOrders()
+        {
+            var orders = _context.Orders
+                .Include(o => o.OrderItems)
+                .Include(o => o.Delivery)
+                .Include(o => o.Payments)
+                .Include(o => o.Table)
+                .ToList();
+            return orders;
+        }
+
+        // GET: api/orders/5
+        [HttpGet("{id}")]
+        public ActionResult<Order> GetOrder(int id)
+        {
+            var order = _context.Orders
+                .Include(o => o.OrderItems)
+                .Include(o => o.Delivery)
+                .Include(o => o.Payments)
+                .Include(o => o.Table)
+                .FirstOrDefault(o => o.OrderId == id);
+
+            if (order == null)
             {
-                var orders = _context.Orders
-                    .Include(o => o.OrderItems)
-                    .Include(o => o.Customers)
-                    .Include(o => o.Delivery)
-                    .Include(o => o.Payments)
-                    .Include(o => o.Table)
-                    .ToList();
-                return orders;
+                return NotFound();
             }
 
-            // GET: api/orders/5
-            [HttpGet("{id}")]
-            public ActionResult<Order> GetOrder(int id)
-            {
-                var order = _context.Orders
-                    .Include(o => o.OrderItems)
-                    .Include(o => o.Customers)
-                    .Include(o => o.Delivery)
-                    .Include(o => o.Payments)
-                    .Include(o => o.Table)
-                    .FirstOrDefault(o => o.OrderId == id);
+            return order;
+        }
 
-                if (order == null)
-                {
-                    return NotFound();
-                }
-
-                return order;
-            }
-
-            // POST: api/orders
-            [HttpPost]
+        // POST: api/orders
+        [HttpPost]
             public ActionResult<Order> PostOrder(Order order)
             {
                 _context.Orders.Add(order);

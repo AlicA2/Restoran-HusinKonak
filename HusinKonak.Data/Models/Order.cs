@@ -5,7 +5,6 @@
         public int OrderId { get; set; }
         public DateTime Date { get; set; }
         public ICollection<OrderItem> OrderItems { get; set; }
-        public ICollection<Customer> Customers { get; set; }
         public virtual Delivery Delivery { get; set; }
         public ICollection<Payment> Payments { get; set; }
 

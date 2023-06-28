@@ -22,6 +22,7 @@ namespace HusinKonak.Data
         public DbSet<Table> Tables { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<Contact> Contacts { get; set; }
+        public DbSet<Contact> SecondReservations { get; set; }
 
         public RestaurantDBContext(DbContextOptions<RestaurantDBContext> options) : base(options)
         {
@@ -34,9 +35,9 @@ namespace HusinKonak.Data
             //.WithOne(e => e.Admin)
             //.HasForeignKey(e => e.AdminId);
 
-            modelBuilder.Entity<Customer>()
-           .HasMany(e => e.Orders)
-           .WithMany(e => e.Customers);
+           // modelBuilder.Entity<Customer>()
+           //.HasMany(e => e.Orders)
+           //.WithMany(e => e.Customers);
 
             modelBuilder.Entity<Delivery>()
             .HasOne(e => e.Order)
@@ -111,17 +112,17 @@ namespace HusinKonak.Data
                 .HasForeignKey(oir => oir.ReviewId);
 
             modelBuilder.Entity<CustomerReward>()
-    .HasKey(cr => new { cr.CustomerId, cr.RewardId });
+            .HasKey(cr => new { cr.CustomerId, cr.RewardId });
 
             modelBuilder.Entity<Reward>()
                 .HasMany(r => r.CustomerRewards)
                 .WithOne(cr => cr.Reward)
                 .HasForeignKey(cr => cr.RewardId);
 
-            modelBuilder.Entity<Customer>()
-                .HasMany(c => c.CustomerRewards)
-                .WithOne(cr => cr.Customer)
-                .HasForeignKey(cr => cr.CustomerId);
+            //modelBuilder.Entity<Customer>()
+            //    .HasMany(c => c.CustomerRewards)
+            //    .WithOne(cr => cr.Customer)
+            //    .HasForeignKey(cr => cr.CustomerId);
 
 
             modelBuilder.Entity<Table>()
