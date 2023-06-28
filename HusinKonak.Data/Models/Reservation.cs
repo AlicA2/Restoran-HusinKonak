@@ -8,6 +8,6 @@
         public int NumberOfGuests { get; set; }
         public int Phone { get; set; }
         public virtual Customer Customer { get; set; }
-        public virtual ICollection<TableReservation> TableReservations { get; set; }
+        public virtual ICollection<TableReservation>? TableReservations { get; set; }
     }
 }
