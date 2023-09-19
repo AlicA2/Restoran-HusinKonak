@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HusinKonak.Data\HusinKonak.Data.csproj" />
-    <ProjectReference Include="..\HusinKonak.Service\HusinKonak.Service.csproj" />
   </ItemGroup>
 
   <ItemGroup>

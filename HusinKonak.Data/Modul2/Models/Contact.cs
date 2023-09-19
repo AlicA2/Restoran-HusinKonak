@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HusinKonak.Data.Models
+namespace HusinKonak.Data.Modul2.Models
 {
     public class Contact
     {
-        
+
     }
 }
