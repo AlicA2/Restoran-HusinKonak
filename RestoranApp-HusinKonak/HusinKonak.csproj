@@ -23,4 +23,8 @@
     <ProjectReference Include="..\HusinKonak.Service\HusinKonak.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>
