@@ -63,16 +63,11 @@ namespace HusinKonak.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CustomerId");
-
-                    b.HasIndex("OrderId");
 
                     b.ToTable("Customers");
                 });
@@ -549,15 +544,6 @@ namespace HusinKonak.Data.Migrations
                     b.ToTable("Transactions");
                 });
 
-            modelBuilder.Entity("HusinKonak.Data.Customer", b =>
-                {
-                    b.HasOne("HusinKonak.Data.Order", null)
-                        .WithMany("Customers")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("HusinKonak.Data.CustomerReward", b =>
                 {
                     b.HasOne("HusinKonak.Data.Customer", "Customer")
@@ -820,8 +806,6 @@ namespace HusinKonak.Data.Migrations
 
             modelBuilder.Entity("HusinKonak.Data.Order", b =>
                 {
-                    b.Navigation("Customers");
-
                     b.Navigation("OrderItems");
 
                     b.Navigation("Payments");

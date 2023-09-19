@@ -5,48 +5,18 @@
 namespace HusinKonak.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class ispravak : Migration
+    public partial class nezz : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "CustomerOrder");
-
-            migrationBuilder.AddColumn<int>(
-                name: "OrderId",
-                table: "Customers",
-                type: "int",
-                nullable: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Customers_OrderId",
-                table: "Customers",
-                column: "OrderId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Customers_Orders_OrderId",
-                table: "Customers",
-                column: "OrderId",
-                principalTable: "Orders",
-                principalColumn: "OrderId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Customers_Orders_OrderId",
-                table: "Customers");
-
-            migrationBuilder.DropIndex(
-                name: "IX_Customers_OrderId",
-                table: "Customers");
-
-            migrationBuilder.DropColumn(
-                name: "OrderId",
-                table: "Customers");
-
             migrationBuilder.CreateTable(
                 name: "CustomerOrder",
                 columns: table => new

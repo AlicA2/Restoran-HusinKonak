@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HusinKonak.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class nova : Migration
+    public partial class pokusaj : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -27,14 +27,29 @@ namespace HusinKonak.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Contact",
+                columns: table => new
+                {
+                    ContactID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Sadrzaj = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Contact", x => x.ContactID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Customers",
                 columns: table => new
                 {
                     CustomerId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ContactInfo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsLoyaltyMember = table.Column<bool>(type: "bit", nullable: false)
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -145,7 +160,8 @@ namespace HusinKonak.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CustomerID = table.Column<int>(type: "int", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    NumberOfGuests = table.Column<int>(type: "int", nullable: false)
+                    NumberOfGuests = table.Column<int>(type: "int", nullable: false),
+                    Phone = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -578,6 +594,9 @@ namespace HusinKonak.Data.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Contact");
+
             migrationBuilder.DropTable(
                 name: "CustomerOrder");
 

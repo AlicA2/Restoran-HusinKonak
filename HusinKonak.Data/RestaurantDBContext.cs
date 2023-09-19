@@ -30,10 +30,10 @@ namespace HusinKonak.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<Admin>()
-            //.HasMany(e => e.Employees)
-            //.WithOne(e => e.Admin)
-            //.HasForeignKey(e => e.AdminId);
+           // modelBuilder.Entity<Admin>()
+           // .HasMany(e => e.Employees)
+           // .WithOne(e => e.Admin)
+           // .HasForeignKey(e => e.AdminId);
 
            // modelBuilder.Entity<Customer>()
            //.HasMany(e => e.Orders)

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HusinKonak.Data.Migrations
 {
     [DbContext(typeof(RestaurantDBContext))]
-    [Migration("20230628102927_Prepravljeno")]
-    partial class Prepravljeno
+    [Migration("20230628125509_nezz")]
+    partial class nezz
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,21 +24,6 @@ namespace HusinKonak.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("CustomerOrder", b =>
-                {
-                    b.Property<int>("CustomersCustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OrdersOrderId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CustomersCustomerId", "OrdersOrderId");
-
-                    b.HasIndex("OrdersOrderId");
-
-                    b.ToTable("CustomerOrder");
-                });
 
             modelBuilder.Entity("HusinKonak.Data.Admin", b =>
                 {
@@ -562,25 +547,10 @@ namespace HusinKonak.Data.Migrations
                     b.ToTable("Transactions");
                 });
 
-            modelBuilder.Entity("CustomerOrder", b =>
-                {
-                    b.HasOne("HusinKonak.Data.Customer", null)
-                        .WithMany()
-                        .HasForeignKey("CustomersCustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HusinKonak.Data.Order", null)
-                        .WithMany()
-                        .HasForeignKey("OrdersOrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("HusinKonak.Data.CustomerReward", b =>
                 {
                     b.HasOne("HusinKonak.Data.Customer", "Customer")
-                        .WithMany("CustomerRewards")
+                        .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -802,11 +772,6 @@ namespace HusinKonak.Data.Migrations
                     b.Navigation("Reservation");
 
                     b.Navigation("Table");
-                });
-
-            modelBuilder.Entity("HusinKonak.Data.Customer", b =>
-                {
-                    b.Navigation("CustomerRewards");
                 });
 
             modelBuilder.Entity("HusinKonak.Data.Delivery", b =>

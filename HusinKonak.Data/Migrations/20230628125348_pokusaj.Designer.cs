@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HusinKonak.Data.Migrations
 {
     [DbContext(typeof(RestaurantDBContext))]
-    [Migration("20230610200306_nova")]
-    partial class nova
+    [Migration("20230628125348_pokusaj")]
+    partial class pokusaj
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -73,14 +73,15 @@ namespace HusinKonak.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerId"));
 
-                    b.Property<string>("ContactInfo")
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsLoyaltyMember")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -292,6 +293,31 @@ namespace HusinKonak.Data.Migrations
                     b.ToTable("MenuItems");
                 });
 
+            modelBuilder.Entity("HusinKonak.Data.Models.Contact", b =>
+                {
+                    b.Property<int>("ContactID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ContactID"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Sadrzaj")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ContactID");
+
+                    b.ToTable("Contact");
+                });
+
             modelBuilder.Entity("HusinKonak.Data.Order", b =>
                 {
                     b.Property<int>("OrderId")
@@ -417,6 +443,9 @@ namespace HusinKonak.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("NumberOfGuests")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Phone")
                         .HasColumnType("int");
 
                     b.HasKey("ReservationId");
@@ -551,7 +580,7 @@ namespace HusinKonak.Data.Migrations
             modelBuilder.Entity("HusinKonak.Data.CustomerReward", b =>
                 {
                     b.HasOne("HusinKonak.Data.Customer", "Customer")
-                        .WithMany("CustomerRewards")
+                        .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -778,11 +807,6 @@ namespace HusinKonak.Data.Migrations
             modelBuilder.Entity("HusinKonak.Data.Admin", b =>
                 {
                     b.Navigation("Employees");
-                });
-
-            modelBuilder.Entity("HusinKonak.Data.Customer", b =>
-                {
-                    b.Navigation("CustomerRewards");
                 });
 
             modelBuilder.Entity("HusinKonak.Data.Delivery", b =>
