@@ -96,7 +96,7 @@ namespace HusinKonak.Data.Modul2.Controllers
         }
 
         [HttpPost]
-        [Autorizacija(false, true)] //admin dodaje korisnike
+        //[Autorizacija(false, true)] //admin dodaje korisnike
         public ActionResult Snimi([FromBody] KorisnikAddVM x)
         {
             Korisnik? korisnik;
