@@ -14,7 +14,7 @@ namespace HusinKonak.Data.Helpers
         {
             if (to == "")
                 return;
-            String SendMailFrom = "fit.korisnik@gmail.com";
+            String SendMailFrom = "darkic951@gmail.com";
 
             SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com", 587);
             SmtpServer.DeliveryMethod = SmtpDeliveryMethod.Network;
@@ -30,7 +30,7 @@ namespace HusinKonak.Data.Helpers
             SmtpServer.Timeout = 5000;
             SmtpServer.EnableSsl = true;
             SmtpServer.UseDefaultCredentials = false;
-            SmtpServer.Credentials = new NetworkCredential(SendMailFrom, "ysvabvgbfxhsmldu");
+            SmtpServer.Credentials = new NetworkCredential(SendMailFrom, "bgyxkruismdmjbwr");
             SmtpServer.Send(email);
         }
     }

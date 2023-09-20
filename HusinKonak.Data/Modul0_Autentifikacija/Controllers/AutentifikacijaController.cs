@@ -71,8 +71,18 @@ namespace HusinKonak.Data.Modul0_Autentifikacija.Controllers
 
             _dbContext.Add(noviToken);
             _dbContext.SaveChanges();
+     
 
-            EmailLog.uspjesnoLogiranKorisnik(noviToken, Request.HttpContext);
+            try
+            {
+                // Your SMTP email sending code here
+                EmailLog.uspjesnoLogiranKorisnik(noviToken, Request.HttpContext);
+            }
+            catch (System.Net.Mail.SmtpException smtpEx)
+            {
+                // Handle the SMTP exception here, you can log the error or take appropriate action
+                Console.WriteLine("SMTP Exception: " + smtpEx.Message);
+            }
 
             //4- vratiti token string
             return new MyAuthTokenExtension.LoginInformacije(noviToken);
