@@ -3,15 +3,19 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Http; // You might need this for .MapControllers()
+using HusinKonak.Data.Helpers.AutentifikacijaAutorizacija;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSignalR();
 
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.OperationFilter<AutorizacijaSwaggerHeader>();
+});
+builder.Services.AddSignalR();
 
 builder.Services.AddDbContext<RestaurantDBContext>(options =>
 {
@@ -31,13 +35,14 @@ app.UseHttpsRedirection();
 app.UseRouting();
 app.UseCors(
     options => options
-        .SetIsOriginAllowed(x => _ = true) // Caution: Only for development
+        .SetIsOriginAllowed(x => _ = true)
         .AllowAnyMethod()
         .AllowAnyHeader()
         .AllowCredentials()
 ); // This needs to be configured more strictly in production
 
 app.UseAuthorization();
+app.MapControllers();
 
 
 app.Run();

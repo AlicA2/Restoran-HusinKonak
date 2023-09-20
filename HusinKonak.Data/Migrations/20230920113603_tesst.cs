@@ -5,7 +5,7 @@
 namespace HusinKonak.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class prva : Migration
+    public partial class tesst : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

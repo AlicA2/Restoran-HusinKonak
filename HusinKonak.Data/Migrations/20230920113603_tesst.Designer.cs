@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HusinKonak.Data.Migrations
 {
     [DbContext(typeof(RestaurantDBContext))]
-    [Migration("20230920092453_prva")]
-    partial class prva
+    [Migration("20230920113603_tesst")]
+    partial class tesst
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

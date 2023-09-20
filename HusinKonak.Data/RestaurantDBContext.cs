@@ -6,7 +6,7 @@ namespace HusinKonak.Data
 {
     public class RestaurantDBContext : DbContext
     {
-        public RestaurantDBContext(DbContextOptions<RestaurantDBContext> options) : base(options)
+        public RestaurantDBContext(DbContextOptions options) : base(options)
         {
         }
         public DbSet<Admin> Admin { get; set; }
@@ -16,6 +16,6 @@ namespace HusinKonak.Data
         public DbSet<Grad> Grad { get; set; }
         public DbSet<Drzava> Drzava { get; set; }
         public DbSet<LogKretanjePoSistemu> LogKretanjePoSistemu { get; set; }
-
+        
     }
 }
