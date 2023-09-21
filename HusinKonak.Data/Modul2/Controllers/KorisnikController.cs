@@ -49,15 +49,9 @@ namespace HusinKonak.Data.Modul2.Controllers
                     id = k.ID,
                     ime = k.Ime,
                     prezime = k.Prezime,
-                    godina_rodjenja = k.DatumRodjenja.Year,
                     telefon = k.Telefon,
                     email = k.Email,
-                    adresa = k.Adresa,
                     spol = k.Spol,
-                    jmbg = k.JMBG,
-                    visina = k.Visina,
-                    tezina = k.Tezina,
-                    datum_polasaka = k.DatumPolasaka.ToShortDateString(),
                     grad = k.grad.Naziv + "(" + k.grad.drzava.Naziv + ")"
 
                 });
@@ -78,15 +72,8 @@ namespace HusinKonak.Data.Modul2.Controllers
                 prezime = korisnik.Prezime,
                 telefon = korisnik.Telefon,
                 email = korisnik.Email,
-                adresa = korisnik.Adresa,
                 spol = korisnik.Spol,
-                jmbg = korisnik.JMBG,
                 grad_ID = korisnik.gradid,
-                datum_rodjenja = korisnik.DatumRodjenja.ToString("yyyy-MM-dd"),
-
-                visina = korisnik.Visina,
-                tezina = korisnik.Tezina,
-                datum_polaska = korisnik.DatumPolasaka.ToString("yyyy-MM-dd"),
 
                 korisnickoIme = korisnik.KorisnickoIme,
                 lozinka = korisnik.Lozinka
@@ -114,17 +101,10 @@ namespace HusinKonak.Data.Modul2.Controllers
             korisnik.ID = x.id;
             korisnik.Ime = x.ime;
             korisnik.Prezime = x.prezime;
-            korisnik.DatumRodjenja = DateTime.Parse(x.datum_rodjenja);
             korisnik.Email = x.email;
-            korisnik.Adresa = x.adresa;
-            korisnik.JMBG = x.jmbg;
             korisnik.Spol = x.spol;
             korisnik.Telefon = x.telefon;
             korisnik.gradid = x.grad_ID;
-
-            korisnik.Visina = x.visina;
-            korisnik.Tezina = x.tezina;
-            korisnik.DatumPolasaka = DateTime.Parse(x.datum_polaska);
 
             korisnik.KorisnickoIme = x.korisnickoIme;
             korisnik.Lozinka = x.lozinka;
