@@ -16,6 +16,7 @@ namespace HusinKonak.Data
         public DbSet<Grad> Grad { get; set; }
         public DbSet<Drzava> Drzava { get; set; }
         public DbSet<LogKretanjePoSistemu> LogKretanjePoSistemu { get; set; }
+        public DbSet<Kontakt> Kontakt { get; set; }
         
     }
 }
