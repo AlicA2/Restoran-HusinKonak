@@ -37,7 +37,7 @@ namespace HusinKonak.Data.Modul2.Controllers
                     Email = kontaktVM.Email,
                     Telefon = kontaktVM.Telefon,
                     Poruka = kontaktVM.Poruka,
-                    korisnickiNalogID = kontaktVM.korisnickiNalogID
+                    korisnikID = kontaktVM.korisnikID
                 };
 
                 _dbContext.Kontakt.Add(kontakt);
@@ -52,12 +52,12 @@ namespace HusinKonak.Data.Modul2.Controllers
         }
 
         [HttpGet("{korisnickiNalogID}")]
-        public ActionResult DohvatiKontakte(int korisnickiNalogID)
+        public ActionResult DohvatiKontakte(int korisnikID)
         {
             try
             {
                 var kontakte = _dbContext.Kontakt
-                    .Where(k => k.korisnickiNalogID == korisnickiNalogID)
+                    .Where(k => k.korisnikID == korisnikID)
                     .Select(k => new KontaktGetVM
                     {
                         ID = k.ID,
@@ -66,8 +66,8 @@ namespace HusinKonak.Data.Modul2.Controllers
                         Email = k.Email,
                         Telefon = k.Telefon,
                         Poruka = k.Poruka,
-                        korisnickiNalogID = k.korisnickiNalogID,
-                        KorisnickoIme = k.korisnickiNalog.KorisnickoIme
+                        korisnikID = k.korisnikID,
+                        KorisnickoIme = k.korisnik.KorisnickoIme
                     })
                     .ToList();
 
