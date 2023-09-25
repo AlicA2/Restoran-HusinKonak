@@ -20,6 +20,22 @@ namespace HusinKonak.Data.Modul0_Autentifikacija.Controllers
             this._dbContext = dbContext;
         }
 
+        [HttpPost]
+        public ActionResult DodajKontakt([FromBody] KontaktAddVM kontakt)
+        {
+            var korisnik = HttpContext.GetLoginInfo().korisnickiNalog;
+
+            if (korisnik == null)
+            {
+                return BadRequest("Korisnik nije autentificiran");
+            }
+
+            // Ovdje dodajte logiku za spremanje kontakta u bazu podataka
+
+            return Ok(new { message = "Kontakt je uspješno poslan." });
+        }
+
+
         [HttpGet("{code}")]
         public ActionResult Otkljucaj(string code)
         {
