@@ -4,6 +4,7 @@ using HusinKonak.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HusinKonak.Data.Migrations
 {
     [DbContext(typeof(RestaurantDBContext))]
-    partial class RestaurantDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230924142817_druga")]
+    partial class druga
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -168,7 +171,7 @@ namespace HusinKonak.Data.Migrations
                     b.ToTable("Grad");
                 });
 
-            modelBuilder.Entity("Kontakt", b =>
+            modelBuilder.Entity("HusinKonak.Data.Modul2.Models.Kontakt", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -196,12 +199,12 @@ namespace HusinKonak.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("korisnikID")
+                    b.Property<int>("korisnickiNalogID")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("korisnikID");
+                    b.HasIndex("korisnickiNalogID");
 
                     b.ToTable("Kontakt");
                 });
@@ -319,15 +322,15 @@ namespace HusinKonak.Data.Migrations
                     b.Navigation("drzava");
                 });
 
-            modelBuilder.Entity("Kontakt", b =>
+            modelBuilder.Entity("HusinKonak.Data.Modul2.Models.Kontakt", b =>
                 {
-                    b.HasOne("HusinKonak.Data.Modul2.Models.Korisnik", "korisnik")
+                    b.HasOne("HusinKonak.Data.Modul0_Autentifikacija.Models.KorisnickiNalog", "korisnickiNalog")
                         .WithMany()
-                        .HasForeignKey("korisnikID")
+                        .HasForeignKey("korisnickiNalogID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("korisnik");
+                    b.Navigation("korisnickiNalog");
                 });
 
             modelBuilder.Entity("HusinKonak.Data.Modul2.Models.Admin", b =>
