@@ -39,7 +39,7 @@ namespace HusinKonak.Data.Modul2.Controllers
         }
 
         [HttpGet]
-        [Autorizacija(false, true)]
+        //[Autorizacija(false, true)]
         public ActionResult<List<KorisnikGetVM>> GetAll()
         {
             var data = _dbContext.Korisnik
@@ -137,7 +137,7 @@ namespace HusinKonak.Data.Modul2.Controllers
         }
 
         [HttpPost("{id}")]
-        [Autorizacija(false, true)]
+        //[Autorizacija(false, true)]
         public ActionResult Obrisi(int id)
         {
             Korisnik? korisnik = _dbContext.Korisnik.Find(id);
