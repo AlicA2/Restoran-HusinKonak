@@ -78,5 +78,31 @@ namespace HusinKonak.Data.Modul2.Controllers
                 return StatusCode(500, $"Greška prilikom dohvatanja kontakata: {ex.Message}");
             }
         }
+        [HttpGet]
+        public ActionResult GetAll()
+        {
+            try
+            {
+                var kontakte = _dbContext.Kontakt
+                    .Select(k => new KontaktGetVM
+                    {
+                        ID = k.ID,
+                        Ime = k.Ime,
+                        Prezime = k.Prezime,
+                        Email = k.Email,
+                        Telefon = k.Telefon,
+                        Poruka = k.Poruka,
+                        korisnikID = k.korisnikID,
+                        KorisnickoIme = k.korisnik.KorisnickoIme
+                    })
+                    .ToList();
+
+                return Ok(kontakte);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Greška prilikom dohvatanja kontakata: {ex.Message}");
+            }
+        }
     }
 }
