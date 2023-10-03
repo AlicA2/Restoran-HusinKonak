@@ -6,8 +6,6 @@ using Microsoft.AspNetCore.Http; // You might need this for .MapControllers()
 using HusinKonak.Data.Helpers.AutentifikacijaAutorizacija;
 
 var builder = WebApplication.CreateBuilder(args);
-
-
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
