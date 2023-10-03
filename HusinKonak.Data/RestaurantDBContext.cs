@@ -18,6 +18,7 @@ namespace HusinKonak.Data
         public DbSet<LogKretanjePoSistemu> LogKretanjePoSistemu { get; set; }
         public DbSet<Kontakt> Kontakt { get; set; }
         public DbSet<Galerija> Galerija{ get; set; }
+        public DbSet<Meni> Meni{ get; set; }
         
     }
 }
