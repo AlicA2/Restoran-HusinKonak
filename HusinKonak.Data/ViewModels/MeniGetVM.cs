@@ -9,7 +9,7 @@ namespace HusinKonak.Data.ViewModels
     public class MeniGetVM
     {
         public int Id { get; set; }
-        public string Ime { get; set; }
+        public string Naziv { get; set; }
         public string Opis { get; set; }
         public decimal Cijena { get; set; }
         public byte[] slika { get; set; }

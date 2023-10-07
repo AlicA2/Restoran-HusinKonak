@@ -9,9 +9,9 @@ namespace HusinKonak.Data.Modul2.Models
     public class Meni
     {
         public int Id { get; set; }
-        public string Ime { get; set; }
+        public string Naziv { get; set; }
         public string Opis { get; set; }
         public decimal Cijena { get; set; }
-        public byte[] slika { get; set; }
+        public byte[]? slika { get; set; }
     }
 }

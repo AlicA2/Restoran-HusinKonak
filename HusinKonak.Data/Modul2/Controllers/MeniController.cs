@@ -1,4 +1,5 @@
-﻿using HusinKonak.Data.Modul2.Models;
+﻿using FIT_Api_Examples.Helper;
+using HusinKonak.Data.Modul2.Models;
 using HusinKonak.Data.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -24,30 +25,40 @@ namespace HusinKonak.Data.Modul2.Controllers
         [HttpPost]
         public ActionResult DodajMeni([FromBody]MeniAddVM x)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest("Neispravni podaci za unos Meni-a.");
-            }
 
-            try
+            if (string.IsNullOrEmpty(x.novaSlika))
             {
-                Meni meni = new Meni
+                byte[]? slika_bajtovi = x.novaSlika?.ParsirajBase64();
+
+                if (slika_bajtovi == null)
+                    return BadRequest("Format slike nije base64");
+
+                if (!ModelState.IsValid)
                 {
-                    Ime = x.Ime,
-                    Opis=x.Opis,
-                    Cijena=x.Cijena,
-                    slika=x.novaSlika
-                };
+                    return BadRequest("Neispravni podaci za unos Meni-a.");
+                }
+            
+                try
+                {
+                    Meni meni = new Meni
+                    {
+                        Naziv = x.Naziv,
+                        Opis = x.Opis,
+                        Cijena = x.Cijena,
+                        slika = slika_bajtovi
+                    };
 
-                _dbContext.Meni.Add(meni);
-                _dbContext.SaveChanges();
+                    _dbContext.Meni.Add(meni);
+                    _dbContext.SaveChanges();
 
-                return Ok(new { message = "Meni uspješno dodan." });
+                    return Ok(new { message = "Meni uspješno dodan." });
+                }
+                catch (Exception ex)
+                {
+                    return StatusCode(500, $"Greška prilikom dodavanja Meni-a: {ex.Message}");
+                }
             }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Greška prilikom dodavanja Meni-a: {ex.Message}");
-            }
+            return Ok();
 
         }
         [HttpGet]
@@ -59,7 +70,7 @@ namespace HusinKonak.Data.Modul2.Controllers
                     .Select(k => new MeniGetVM
                     {
                          Id=k.Id,
-                         Ime=k.Ime,
+                         Naziv=k.Naziv,
                          Opis=k.Opis,
                          Cijena=k.Cijena,
                          slika=k.slika
