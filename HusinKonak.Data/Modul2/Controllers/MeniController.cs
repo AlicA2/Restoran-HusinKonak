@@ -21,44 +21,33 @@ namespace HusinKonak.Data.Modul2.Controllers
             _dbContext = dbContext;
         }
 
-
         [HttpPost]
         public ActionResult DodajMeni([FromBody]MeniAddVM x)
         {
-
-            if (string.IsNullOrEmpty(x.novaSlika))
+            if (!ModelState.IsValid)
             {
-                byte[]? slika_bajtovi = x.novaSlika?.ParsirajBase64();
-
-                if (slika_bajtovi == null)
-                    return BadRequest("Format slike nije base64");
-
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest("Neispravni podaci za unos Meni-a.");
-                }
-            
-                try
-                {
-                    Meni meni = new Meni
-                    {
-                        Naziv = x.Naziv,
-                        Opis = x.Opis,
-                        Cijena = x.Cijena,
-                        slika = slika_bajtovi
-                    };
-
-                    _dbContext.Meni.Add(meni);
-                    _dbContext.SaveChanges();
-
-                    return Ok(new { message = "Meni uspješno dodan." });
-                }
-                catch (Exception ex)
-                {
-                    return StatusCode(500, $"Greška prilikom dodavanja Meni-a: {ex.Message}");
-                }
+                return BadRequest("Neispravni podaci za unos meni-a.");
             }
-            return Ok();
+
+            try
+            {
+                Meni meni = new Meni
+                {
+                    Naziv = x.Naziv,
+                    Opis=x.Opis,
+                    Cijena=x.Cijena,
+                    kategorija_id=x.kategorija_id
+
+                };
+                _dbContext.Meni.Add(meni);
+                _dbContext.SaveChanges();
+
+                return Ok(new { message = "Meni uspješno dodan." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Greška prilikom dodavanja meni-a: {ex.Message}");
+            }
 
         }
         [HttpGet]
@@ -69,11 +58,11 @@ namespace HusinKonak.Data.Modul2.Controllers
                 var meni = _dbContext.Meni
                     .Select(k => new MeniGetVM
                     {
-                         Id=k.Id,
-                         Naziv=k.Naziv,
-                         Opis=k.Opis,
-                         Cijena=k.Cijena,
-                         slika=k.slika
+                        Id = k.Id,
+                        Naziv=k.Naziv,
+                        Opis = k.Opis,
+                        Cijena = k.Cijena,
+                        kategorija_id = k.kategorija_id
                     })
                     .ToList();
 
@@ -81,7 +70,7 @@ namespace HusinKonak.Data.Modul2.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Greška prilikom dohvatanja Meni-a: {ex.Message}");
+                return StatusCode(500, $"Greška prilikom dohvatanja meni-a: {ex.Message}");
             }
         }
 

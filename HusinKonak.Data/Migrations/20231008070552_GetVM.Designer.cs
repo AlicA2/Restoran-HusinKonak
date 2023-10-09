@@ -4,6 +4,7 @@ using HusinKonak.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HusinKonak.Data.Migrations
 {
     [DbContext(typeof(RestaurantDBContext))]
-    partial class RestaurantDBContextModelSnapshot : ModelSnapshot
+    [Migration("20231008070552_GetVM")]
+    partial class GetVM
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -213,6 +216,9 @@ namespace HusinKonak.Data.Migrations
                     b.Property<decimal>("Cijena")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int?>("KategorijaId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Naziv")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -221,12 +227,9 @@ namespace HusinKonak.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("kategorija_id")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("kategorija_id");
+                    b.HasIndex("KategorijaId");
 
                     b.ToTable("Meni");
                 });
@@ -384,11 +387,9 @@ namespace HusinKonak.Data.Migrations
 
             modelBuilder.Entity("HusinKonak.Data.Modul2.Models.Meni", b =>
                 {
-                    b.HasOne("HusinKonak.Data.Modul2.Models.Kategorija", "kategorija")
-                        .WithMany()
-                        .HasForeignKey("kategorija_id");
-
-                    b.Navigation("kategorija");
+                    b.HasOne("HusinKonak.Data.Modul2.Models.Kategorija", null)
+                        .WithMany("Menii")
+                        .HasForeignKey("KategorijaId");
                 });
 
             modelBuilder.Entity("Kontakt", b =>
@@ -434,6 +435,11 @@ namespace HusinKonak.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("grad");
+                });
+
+            modelBuilder.Entity("HusinKonak.Data.Modul2.Models.Kategorija", b =>
+                {
+                    b.Navigation("Menii");
                 });
 #pragma warning restore 612, 618
         }
