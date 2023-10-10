@@ -18,5 +18,6 @@ namespace HusinKonak.Data.Modul2.Models
         public int? kategorija_id { get; set; }
         public Kategorija kategorija { get; set; }
 
+
     }
 }

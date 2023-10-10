@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HusinKonak.Data.Migrations
 {
     [DbContext(typeof(RestaurantDBContext))]
-    [Migration("20230921114617_pokusaj")]
-    partial class pokusaj
+    [Migration("20231010202604_MenuFinished")]
+    partial class MenuFinished
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -146,6 +146,23 @@ namespace HusinKonak.Data.Migrations
                     b.ToTable("Drzava");
                 });
 
+            modelBuilder.Entity("HusinKonak.Data.Modul2.Models.Galerija", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<byte[]>("slika")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Galerija");
+                });
+
             modelBuilder.Entity("HusinKonak.Data.Modul2.Models.Grad", b =>
                 {
                     b.Property<int>("ID")
@@ -169,6 +186,90 @@ namespace HusinKonak.Data.Migrations
                     b.HasIndex("drzavaID");
 
                     b.ToTable("Grad");
+                });
+
+            modelBuilder.Entity("HusinKonak.Data.Modul2.Models.Kategorija", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Naziv")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Kategorija");
+                });
+
+            modelBuilder.Entity("HusinKonak.Data.Modul2.Models.Meni", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Cijena")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Naziv")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Opis")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("kategorija_id")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("kategorija_id");
+
+                    b.ToTable("Meni");
+                });
+
+            modelBuilder.Entity("Kontakt", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ime")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Poruka")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Prezime")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefon")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("korisnikID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("korisnikID");
+
+                    b.ToTable("Kontakt");
                 });
 
             modelBuilder.Entity("HusinKonak.Data.Modul2.Models.Admin", b =>
@@ -282,6 +383,26 @@ namespace HusinKonak.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("drzava");
+                });
+
+            modelBuilder.Entity("HusinKonak.Data.Modul2.Models.Meni", b =>
+                {
+                    b.HasOne("HusinKonak.Data.Modul2.Models.Kategorija", "kategorija")
+                        .WithMany()
+                        .HasForeignKey("kategorija_id");
+
+                    b.Navigation("kategorija");
+                });
+
+            modelBuilder.Entity("Kontakt", b =>
+                {
+                    b.HasOne("HusinKonak.Data.Modul2.Models.Korisnik", "korisnik")
+                        .WithMany()
+                        .HasForeignKey("korisnikID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("korisnik");
                 });
 
             modelBuilder.Entity("HusinKonak.Data.Modul2.Models.Admin", b =>

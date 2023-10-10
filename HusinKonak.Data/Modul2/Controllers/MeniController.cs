@@ -37,7 +37,7 @@ namespace HusinKonak.Data.Modul2.Controllers
                     Opis=x.Opis,
                     Cijena=x.Cijena,
                     kategorija_id=x.kategorija_id
-
+                    
                 };
                 _dbContext.Meni.Add(meni);
                 _dbContext.SaveChanges();
@@ -73,6 +73,25 @@ namespace HusinKonak.Data.Modul2.Controllers
                 return StatusCode(500, $"Greška prilikom dohvatanja meni-a: {ex.Message}");
             }
         }
+        [HttpDelete("{id}")]
+        public ActionResult DeleteMeni(int id)
+        {
 
+            var meni = _dbContext.Meni.Find(id);
+            if (meni == null)
+            {
+                return NotFound($"Meni sa ID-om {id} nije pronađen.");
+            }
+
+
+
+            _dbContext.Meni.Remove(meni);
+            _dbContext.SaveChanges();
+
+
+
+            return Ok(new { message = $"Meni sa ID-om {id} uspješno obrisan." });
+
+        }
     }
 }

@@ -5,7 +5,7 @@
 namespace HusinKonak.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class migracija : Migration
+    public partial class MenuFinished : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

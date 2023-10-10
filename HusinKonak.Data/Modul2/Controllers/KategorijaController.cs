@@ -66,6 +66,26 @@ namespace HusinKonak.Data.Modul2.Controllers
                 return StatusCode(500, $"Greška prilikom dohvatanja kategorije: {ex.Message}");
             }
         }
+        [HttpDelete("{id}")]
+        public ActionResult DeleteKategorija(int id)
+        {
+
+            var kategorija = _dbContext.Kategorija.Find(id);
+            if (kategorija == null)
+            {
+                return NotFound($"Kategorija sa ID-om {id} nije pronađen.");
+            }
+
+
+
+            _dbContext.Kategorija.Remove(kategorija);
+            _dbContext.SaveChanges();
+
+
+
+            return Ok(new { message = $"Kategorija sa ID-om {id} uspješno obrisan." });
+
+        }
     }
 }
 
