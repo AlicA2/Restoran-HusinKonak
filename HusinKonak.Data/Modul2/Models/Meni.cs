@@ -14,6 +14,7 @@ namespace HusinKonak.Data.Modul2.Models
         public string Naziv { get; set; }
         public string Opis { get; set; }
         public decimal Cijena { get; set; }
+        public byte[] Slika { get; set; }
         [ForeignKey(nameof(kategorija))]
         public int? kategorija_id { get; set; }
         public Kategorija kategorija { get; set; }

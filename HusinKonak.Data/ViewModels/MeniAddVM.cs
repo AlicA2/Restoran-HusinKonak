@@ -12,5 +12,7 @@ namespace HusinKonak.Data.ViewModels
         public string Opis { get; set; }
         public decimal Cijena { get; set; }
         public int? kategorija_id { get; set; }
+        public string? SlikaBase64 { get; set; } // Dodajte polje za Base64 reprezentaciju slike
+
     }
 }

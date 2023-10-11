@@ -31,18 +31,27 @@ namespace HusinKonak.Data.Modul2.Controllers
 
             try
             {
-                Meni meni = new Meni
+                if (!string.IsNullOrEmpty(x.SlikaBase64))
                 {
-                    Naziv = x.Naziv,
-                    Opis=x.Opis,
-                    Cijena=x.Cijena,
-                    kategorija_id=x.kategorija_id
-                    
-                };
-                _dbContext.Meni.Add(meni);
-                _dbContext.SaveChanges();
+                    byte[]? slika_bajtovi = x.SlikaBase64?.ParsirajBase64();
 
+                    if (slika_bajtovi == null)
+                        return BadRequest("Format slike nije base64");
+
+                    Meni meni = new Meni
+                    {
+                        Naziv = x.Naziv,
+                        Opis = x.Opis,
+                        Cijena = x.Cijena,
+                        kategorija_id = x.kategorija_id,
+                        Slika = slika_bajtovi
+                    };
+                    _dbContext.Meni.Add(meni);
+                    _dbContext.SaveChanges();
+
+                }
                 return Ok(new { message = "Meni uspješno dodan." });
+
             }
             catch (Exception ex)
             {
@@ -51,7 +60,7 @@ namespace HusinKonak.Data.Modul2.Controllers
 
         }
         [HttpGet]
-        public ActionResult GetAll()
+        public ActionResult<IEnumerable<string>> GetAll()
         {
             try
             {
@@ -62,7 +71,8 @@ namespace HusinKonak.Data.Modul2.Controllers
                         Naziv=k.Naziv,
                         Opis = k.Opis,
                         Cijena = k.Cijena,
-                        kategorija_id = k.kategorija_id
+                        kategorija_id = k.kategorija_id,
+                        SlikaBase64 =  Convert.ToBase64String(k.Slika) // Konvertuj sliku u URL u formatu Base64
                     })
                     .ToList();
 
