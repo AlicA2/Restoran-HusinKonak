@@ -20,6 +20,8 @@ namespace HusinKonak.Data
         public DbSet<Galerija> Galerija{ get; set; }
         public DbSet<Meni> Meni{ get; set; }
         public DbSet<Kategorija> Kategorija{ get; set; }
+        public DbSet<ForumTema> ForumTema{ get; set; }
+        public DbSet<ForumOdgovor> ForumOdgovor{ get; set; }
         
     }
 }
