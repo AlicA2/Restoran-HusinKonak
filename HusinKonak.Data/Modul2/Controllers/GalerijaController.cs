@@ -46,6 +46,19 @@ namespace HusinKonak.Data.Modul2.Controllers
             return Ok(imageUrls);
         }
 
+        [HttpGet]
+        public ActionResult<int> GetFirstImageId()
+        {
+            var firstImage = _dbContext.Galerija.FirstOrDefault();
+
+            if (firstImage == null)
+            {
+                return NotFound("Nijedna slika nije pronađena.");
+            }
+
+            return firstImage.ID;
+        }
+
 
 
         [HttpPost]
