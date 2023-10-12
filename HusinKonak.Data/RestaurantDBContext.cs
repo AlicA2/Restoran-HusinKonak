@@ -22,6 +22,8 @@ namespace HusinKonak.Data
         public DbSet<Kategorija> Kategorija{ get; set; }
         public DbSet<ForumTema> ForumTema{ get; set; }
         public DbSet<ForumOdgovor> ForumOdgovor{ get; set; }
+        public DbSet<Dostava> Dostava { get; set; }
+        public DbSet<DetaljiDostave> DetaljiDostave { get; set; }
         
     }
 }
