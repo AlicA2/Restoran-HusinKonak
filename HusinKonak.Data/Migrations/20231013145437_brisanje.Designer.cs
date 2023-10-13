@@ -4,6 +4,7 @@ using HusinKonak.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HusinKonak.Data.Migrations
 {
     [DbContext(typeof(RestaurantDBContext))]
-    partial class RestaurantDBContextModelSnapshot : ModelSnapshot
+    [Migration("20231013145437_brisanje")]
+    partial class brisanje
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -121,43 +124,6 @@ namespace HusinKonak.Data.Migrations
                     b.HasIndex("korisnikID");
 
                     b.ToTable("LogKretanjePoSistemu");
-                });
-
-            modelBuilder.Entity("HusinKonak.Data.Modul2.Models.Dostava", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Adresa")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("BrojTelefona")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Cijena")
-                        .HasColumnType("real");
-
-                    b.Property<int>("Kolicina")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("korisnik_id")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("meni_id")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("korisnik_id");
-
-                    b.HasIndex("meni_id");
-
-                    b.ToTable("Dostava");
                 });
 
             modelBuilder.Entity("HusinKonak.Data.Modul2.Models.Drzava", b =>
@@ -468,21 +434,6 @@ namespace HusinKonak.Data.Migrations
                         .HasForeignKey("korisnikID");
 
                     b.Navigation("korisnik");
-                });
-
-            modelBuilder.Entity("HusinKonak.Data.Modul2.Models.Dostava", b =>
-                {
-                    b.HasOne("HusinKonak.Data.Modul2.Models.Korisnik", "korisnik")
-                        .WithMany()
-                        .HasForeignKey("korisnik_id");
-
-                    b.HasOne("HusinKonak.Data.Modul2.Models.Meni", "meni")
-                        .WithMany()
-                        .HasForeignKey("meni_id");
-
-                    b.Navigation("korisnik");
-
-                    b.Navigation("meni");
                 });
 
             modelBuilder.Entity("HusinKonak.Data.Modul2.Models.ForumOdgovor", b =>

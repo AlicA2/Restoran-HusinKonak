@@ -1,90 +1,83 @@
-﻿using HusinKonak.Data.Modul2.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using HusinKonak.Data.Modul2.Models;
 using HusinKonak.Data.ViewModels;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Linq;
-using System.Threading.Tasks;
+using HusinKonak.Data;
 
-namespace HusinKonak.Data.Modul2.Controllers
+namespace HusinKonak.Controllers
 {
-    [Route("[controller]/[action]")]
+    [Route("api/dostava")]
     [ApiController]
     public class DostavaController : ControllerBase
     {
-        private readonly RestaurantDBContext _dbContext;
+        private readonly RestaurantDBContext _context;
 
-        public DostavaController(RestaurantDBContext dbContext)
+        public DostavaController(RestaurantDBContext context)
         {
-            _dbContext = dbContext;
+            _context = context;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public ActionResult GetDostave()
         {
-            try
-            {
-                var dostave = await _dbContext.Dostava
-                    .Include(d => d.StavkeDostave)
-                    .ToListAsync();
-
-                var dostaveVM = dostave.Select(dostava => new DostavaGetVM
+            var dostave = _context.Dostava
+                .Select(d => new DostavaGetVM
                 {
-                    Id = dostava.Id,
-                    KorisnikId = dostava.KorisnikId,
-                    DatumNarudzbe = dostava.DatumNarudzbe,
-                    AdresaDostave = dostava.AdresaDostave,
-                    UkupnaCijena = dostava.UkupnaCijena,
-                    StavkeDostave = dostava.StavkeDostave.Select(stavka => new DetaljiDostaveGetVM
-                    {
-                        Id = stavka.Id,
-                        MeniId = stavka.MeniId,
-                        Kolicina = stavka.Kolicina,
-                        CijenaPoStavci = stavka.CijenaPoStavci
-                    }).ToList()
-                }).ToList();
+                    Id = d.Id,
+                    Cijena = d.Cijena,
+                    Kolicina = d.Kolicina,
+                    Adresa = d.Adresa,
+                    BrojTelefona=d.BrojTelefona,
+                    korisnik_id = d.korisnik_id,
+                    meni_id = d.meni_id
+                })
+                .ToList();
 
-                return Ok(dostaveVM);
-            }
-            catch (Exception ex)
+            return Ok(dostave);
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult<DostavaGetVM> GetDostava(int id)
+        {
+            var dostava = _context.Dostava.FirstOrDefault(d => d.Id == id);
+
+            if (dostava == null)
+                return NotFound();
+
+            var dostavaGetVM = new DostavaGetVM
             {
-                return StatusCode(500, $"Greška prilikom dohvatanja dostava: {ex.Message}");
-            }
+                Id = dostava.Id,
+                Cijena = dostava.Cijena,
+                Kolicina = dostava.Kolicina,
+                Adresa = dostava.Adresa,
+                BrojTelefona = dostava.BrojTelefona,
+                korisnik_id = dostava.korisnik_id,
+                meni_id = dostava.meni_id
+            };
+
+            return Ok(dostavaGetVM);
         }
 
         [HttpPost]
-        public async Task<IActionResult> DodajDostavu([FromBody] DostavaAddVM model)
+        public ActionResult<DostavaGetVM> AddDostava(DostavaAddVM model)
         {
             if (!ModelState.IsValid)
-            {
-                return BadRequest("Neispravni podaci za unos dostave.");
-            }
+                return BadRequest(ModelState);
 
-            try
+            var novaDostava = new Dostava
             {
-                var dostava = new Dostava
-                {
-                    KorisnikId = model.KorisnikId,
-                    AdresaDostave = model.AdresaDostave,
-                    DatumNarudzbe = DateTime.Now,
-                    UkupnaCijena = model.StavkeNarudzbe.Sum(s => s.Kolicina * s.CijenaPoStavci),
-                    StavkeDostave = model.StavkeNarudzbe.Select(s => new DetaljiDostave
-                    {
-                        MeniId = s.MeniId,
-                        Kolicina = s.Kolicina,
-                        CijenaPoStavci = s.CijenaPoStavci
-                    }).ToList()
-                };
+                Cijena = model.Cijena,
+                Kolicina = model.Kolicina,
+                Adresa = model.Adresa,
+                BrojTelefona=model.BrojTelefona,
+                korisnik_id = model.korisnik_id,
+                meni_id = model.meni_id
+            };
 
-                _dbContext.Dostava.Add(dostava);
-                await _dbContext.SaveChangesAsync();
+            _context.Dostava.Add(novaDostava);
+            _context.SaveChanges();
 
-                return Ok(new { message = "Dostava uspješno dodana." });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Greška prilikom dodavanja dostave: {ex.Message}");
-            }
+            return CreatedAtAction("GetDostava", new { id = novaDostava.Id }, novaDostava);
         }
     }
 }

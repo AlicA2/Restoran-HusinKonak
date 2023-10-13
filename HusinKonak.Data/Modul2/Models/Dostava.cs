@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -10,16 +9,16 @@ namespace HusinKonak.Data.Modul2.Models
 {
     public class Dostava
     {
-        [Key]
         public int Id { get; set; }
-        [ForeignKey(nameof(Korisnik))]
-        public int KorisnikId { get; set; }
-        public Korisnik Korisnik { get; set; }
-
-        public DateTime DatumNarudzbe { get; set; }
-        public string AdresaDostave { get; set; }
-        public decimal UkupnaCijena { get; set; }
-        public List<DetaljiDostave> StavkeDostave { get; set; }
-
+        public float Cijena { get; set; }
+        public int Kolicina { get; set; }
+        public string Adresa { get; set; }
+        public string BrojTelefona { get; set; }
+        [ForeignKey(nameof(korisnik))]
+        public int? korisnik_id { get; set; }
+        public Korisnik korisnik { get; set; }
+        [ForeignKey(nameof(meni))]
+        public int? meni_id { get; set; }
+        public Meni meni { get; set; }
     }
 }
