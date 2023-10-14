@@ -4,6 +4,7 @@ using HusinKonak.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HusinKonak.Data.Migrations
 {
     [DbContext(typeof(RestaurantDBContext))]
-    partial class RestaurantDBContextModelSnapshot : ModelSnapshot
+    [Migration("20231013155915_testiranje2")]
+    partial class testiranje2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -158,6 +161,29 @@ namespace HusinKonak.Data.Migrations
                     b.HasIndex("meni_id");
 
                     b.ToTable("Dostava");
+                });
+
+            modelBuilder.Entity("HusinKonak.Data.Modul2.Models.DostavaMeni", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DostavaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MeniId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DostavaId");
+
+                    b.HasIndex("MeniId");
+
+                    b.ToTable("DostavaMeni");
                 });
 
             modelBuilder.Entity("HusinKonak.Data.Modul2.Models.Drzava", b =>
@@ -485,6 +511,25 @@ namespace HusinKonak.Data.Migrations
                     b.Navigation("meni");
                 });
 
+            modelBuilder.Entity("HusinKonak.Data.Modul2.Models.DostavaMeni", b =>
+                {
+                    b.HasOne("HusinKonak.Data.Modul2.Models.Dostava", "Dostava")
+                        .WithMany("NarucenaJela")
+                        .HasForeignKey("DostavaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HusinKonak.Data.Modul2.Models.Meni", "Meni")
+                        .WithMany()
+                        .HasForeignKey("MeniId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Dostava");
+
+                    b.Navigation("Meni");
+                });
+
             modelBuilder.Entity("HusinKonak.Data.Modul2.Models.ForumOdgovor", b =>
                 {
                     b.HasOne("HusinKonak.Data.Modul2.Models.ForumTema", "forumTema")
@@ -570,6 +615,11 @@ namespace HusinKonak.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("grad");
+                });
+
+            modelBuilder.Entity("HusinKonak.Data.Modul2.Models.Dostava", b =>
+                {
+                    b.Navigation("NarucenaJela");
                 });
 #pragma warning restore 612, 618
         }

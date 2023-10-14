@@ -4,6 +4,7 @@ using HusinKonak.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HusinKonak.Data.Migrations
 {
     [DbContext(typeof(RestaurantDBContext))]
-    partial class RestaurantDBContextModelSnapshot : ModelSnapshot
+    [Migration("20231013155034_testiranje")]
+    partial class testiranje
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -308,6 +311,9 @@ namespace HusinKonak.Data.Migrations
                     b.Property<decimal>("Cijena")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int?>("DostavaId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Naziv")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -324,6 +330,8 @@ namespace HusinKonak.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DostavaId");
 
                     b.HasIndex("kategorija_id");
 
@@ -520,6 +528,10 @@ namespace HusinKonak.Data.Migrations
 
             modelBuilder.Entity("HusinKonak.Data.Modul2.Models.Meni", b =>
                 {
+                    b.HasOne("HusinKonak.Data.Modul2.Models.Dostava", null)
+                        .WithMany("NarucenaJela")
+                        .HasForeignKey("DostavaId");
+
                     b.HasOne("HusinKonak.Data.Modul2.Models.Kategorija", "kategorija")
                         .WithMany()
                         .HasForeignKey("kategorija_id");
@@ -570,6 +582,11 @@ namespace HusinKonak.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("grad");
+                });
+
+            modelBuilder.Entity("HusinKonak.Data.Modul2.Models.Dostava", b =>
+                {
+                    b.Navigation("NarucenaJela");
                 });
 #pragma warning restore 612, 618
         }
