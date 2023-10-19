@@ -131,13 +131,26 @@ namespace HusinKonak.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Adresa")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("DatumKreiranja")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("BrojTelefona")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("korisnik_id")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("korisnik_id");
+
+                    b.ToTable("Dostava");
+                });
+
+            modelBuilder.Entity("HusinKonak.Data.Modul2.Models.DostavaMeni", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<float>("Cijena")
                         .HasColumnType("real");
@@ -145,19 +158,19 @@ namespace HusinKonak.Data.Migrations
                     b.Property<int>("Kolicina")
                         .HasColumnType("int");
 
-                    b.Property<int?>("korisnik_id")
+                    b.Property<int>("dostava_id")
                         .HasColumnType("int");
 
-                    b.Property<int?>("meni_id")
+                    b.Property<int>("meni_id")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("korisnik_id");
+                    b.HasIndex("dostava_id");
 
                     b.HasIndex("meni_id");
 
-                    b.ToTable("Dostava");
+                    b.ToTable("DostavaMeni");
                 });
 
             modelBuilder.Entity("HusinKonak.Data.Modul2.Models.Drzava", b =>
@@ -476,13 +489,26 @@ namespace HusinKonak.Data.Migrations
                         .WithMany()
                         .HasForeignKey("korisnik_id");
 
-                    b.HasOne("HusinKonak.Data.Modul2.Models.Meni", "meni")
-                        .WithMany()
-                        .HasForeignKey("meni_id");
-
                     b.Navigation("korisnik");
+                });
 
-                    b.Navigation("meni");
+            modelBuilder.Entity("HusinKonak.Data.Modul2.Models.DostavaMeni", b =>
+                {
+                    b.HasOne("HusinKonak.Data.Modul2.Models.Dostava", "Dostava")
+                        .WithMany()
+                        .HasForeignKey("dostava_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HusinKonak.Data.Modul2.Models.Meni", "Meni")
+                        .WithMany()
+                        .HasForeignKey("meni_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Dostava");
+
+                    b.Navigation("Meni");
                 });
 
             modelBuilder.Entity("HusinKonak.Data.Modul2.Models.ForumOdgovor", b =>

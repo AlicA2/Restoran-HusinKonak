@@ -15,6 +15,6 @@ namespace HusinKonak.Data.ViewModels
         public string Adresa { get; set; }
         public string BrojTelefona { get; set; }
         public int? korisnik_id { get; set; }
-        public int? meni_id { get; set; }
+        public List<int> MeniItems { get; set; }
     }
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HusinKonak.Data.Migrations
 {
     [DbContext(typeof(RestaurantDBContext))]
-    [Migration("20231013155915_testiranje2")]
-    partial class testiranje2
+    [Migration("20231016102923_prvaMig")]
+    partial class prvaMig
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -134,31 +134,15 @@ namespace HusinKonak.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Adresa")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("BrojTelefona")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Cijena")
-                        .HasColumnType("real");
-
-                    b.Property<int>("Kolicina")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("DatumKreiranja")
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("korisnik_id")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("meni_id")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("korisnik_id");
-
-                    b.HasIndex("meni_id");
 
                     b.ToTable("Dostava");
                 });
@@ -171,17 +155,23 @@ namespace HusinKonak.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("DostavaId")
+                    b.Property<float>("Cijena")
+                        .HasColumnType("real");
+
+                    b.Property<int>("Kolicina")
                         .HasColumnType("int");
 
-                    b.Property<int>("MeniId")
+                    b.Property<int>("dostava_id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("meni_id")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DostavaId");
+                    b.HasIndex("dostava_id");
 
-                    b.HasIndex("MeniId");
+                    b.HasIndex("meni_id");
 
                     b.ToTable("DostavaMeni");
                 });
@@ -502,26 +492,20 @@ namespace HusinKonak.Data.Migrations
                         .WithMany()
                         .HasForeignKey("korisnik_id");
 
-                    b.HasOne("HusinKonak.Data.Modul2.Models.Meni", "meni")
-                        .WithMany()
-                        .HasForeignKey("meni_id");
-
                     b.Navigation("korisnik");
-
-                    b.Navigation("meni");
                 });
 
             modelBuilder.Entity("HusinKonak.Data.Modul2.Models.DostavaMeni", b =>
                 {
                     b.HasOne("HusinKonak.Data.Modul2.Models.Dostava", "Dostava")
-                        .WithMany("NarucenaJela")
-                        .HasForeignKey("DostavaId")
+                        .WithMany()
+                        .HasForeignKey("dostava_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("HusinKonak.Data.Modul2.Models.Meni", "Meni")
                         .WithMany()
-                        .HasForeignKey("MeniId")
+                        .HasForeignKey("meni_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -615,11 +599,6 @@ namespace HusinKonak.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("grad");
-                });
-
-            modelBuilder.Entity("HusinKonak.Data.Modul2.Models.Dostava", b =>
-                {
-                    b.Navigation("NarucenaJela");
                 });
 #pragma warning restore 612, 618
         }

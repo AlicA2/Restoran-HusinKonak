@@ -10,16 +10,9 @@ namespace HusinKonak.Data.ViewModels
 {
     public class DostavaAddVM
     {
-        [Required]
-        public float Cijena { get; set; }
-        [Required]
-        public int Kolicina { get; set; }
-        [Required]
-        public string Adresa { get; set; }
-        [Required]
-        public string BrojTelefona { get; set; }
+        public int id { get; set; }
+        public DateTime datumKreiranja { get; set; }
+        public int? korisnikId { get; set; }
 
-        public int? korisnik_id { get; set; }
-        public int? meni_id { get; set; }
     }
 }
