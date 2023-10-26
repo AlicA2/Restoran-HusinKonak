@@ -25,6 +25,6 @@ namespace HusinKonak.Data
         public DbSet<Dostava> Dostava{ get; set; }
         public DbSet<Korpa> Korpa{ get; set; }
         public DbSet<Kartica> Kartica{ get; set; }
-
+        public DbSet<AboutMe> AboutMe { get; set; }
     }
 }

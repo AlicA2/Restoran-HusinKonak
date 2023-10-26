@@ -109,7 +109,6 @@ namespace HusinKonak.Data.Modul2.Controllers
             korisnik.KorisnickoIme = x.korisnickoIme;
             korisnik.Lozinka = x.lozinka;
 
-
             //provjera da li postoje korsnici koji imaju isto korIme i lozinku
 
             if (x.id == 0)
