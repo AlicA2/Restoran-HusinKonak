@@ -7,18 +7,15 @@ using System.Threading.Tasks;
 
 namespace HusinKonak.Data.Modul2.Models
 {
-    public class DostavaMeni
+    public class Korpa
     {
         public int Id { get; set; }
         public int Kolicina { get; set; }
-        public float Cijena { get; set; }
-
         [ForeignKey(nameof(Meni))]
-        public int meni_id { get; set; }
+        public int? meni_id { get; set; }
         public Meni Meni { get; set; }
-
-        [ForeignKey(nameof(Dostava))]
-        public int dostava_id { get; set; }
-        public Dostava Dostava { get; set; }
+        [ForeignKey(nameof(korisnik))]
+        public int? korisnik_id { get; set; }
+        public Korisnik korisnik { get; set; }
     }
 }

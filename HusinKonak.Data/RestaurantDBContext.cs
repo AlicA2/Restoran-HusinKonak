@@ -23,6 +23,8 @@ namespace HusinKonak.Data
         public DbSet<ForumTema> ForumTema{ get; set; }
         public DbSet<ForumOdgovor> ForumOdgovor{ get; set; }
         public DbSet<Dostava> Dostava{ get; set; }
-        public DbSet<DostavaMeni> DostavaMeni{ get; set; }
+        public DbSet<Korpa> Korpa{ get; set; }
+        public DbSet<Kartica> Kartica{ get; set; }
+
     }
 }

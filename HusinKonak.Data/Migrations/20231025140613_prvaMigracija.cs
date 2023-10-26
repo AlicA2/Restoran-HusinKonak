@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HusinKonak.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class prvaMig : Migration
+    public partial class prvaMigracija : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -36,6 +36,29 @@ namespace HusinKonak.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Galerija", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Kartica",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TipKartice = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BrojKartice = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Ime = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Prezime = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AdresaRacuna = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Grad = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Drzava = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Telefon = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PostanskiBroj = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DatumIsteka = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SigurnosniKod = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Kartica", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -89,26 +112,26 @@ namespace HusinKonak.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Meni",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Naziv = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Opis = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Cijena = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Slika = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    kategorija_id = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Meni", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Meni_Kategorija_kategorija_id",
-                        column: x => x.kategorija_id,
-                        principalTable: "Kategorija",
-                        principalColumn: "Id");
-                });
+       name: "Meni",
+       columns: table => new
+       {
+           Id = table.Column<int>(type: "int", nullable: false)
+               .Annotation("SqlServer:Identity", "1, 1"),
+           Naziv = table.Column<string>(type: "nvarchar(max)", nullable: false),
+           Opis = table.Column<string>(type: "nvarchar(max)", nullable: false),
+           Cijena = table.Column<decimal>(type: "decimal(18, 2)", nullable: false), // Specify the column type here
+        Slika = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+           kategorija_id = table.Column<int>(type: "int", nullable: true)
+       },
+       constraints: table =>
+       {
+           table.PrimaryKey("PK_Meni", x => x.Id);
+           table.ForeignKey(
+               name: "FK_Meni_Kategorija_kategorija_id",
+               column: x => x.kategorija_id,
+               principalTable: "Kategorija",
+               principalColumn: "Id");
+       });
 
             migrationBuilder.CreateTable(
                 name: "AutentifikacijaToken",
@@ -264,7 +287,6 @@ namespace HusinKonak.Data.Migrations
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
-
             migrationBuilder.CreateTable(
                 name: "Dostava",
                 columns: table => new
@@ -272,11 +294,22 @@ namespace HusinKonak.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DatumKreiranja = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    korisnik_id = table.Column<int>(type: "int", nullable: true)
+                    Cijena = table.Column<decimal>(type: "decimal(18, 2)", nullable: false), 
+        TelefonDostave = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AdresaDostave = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    korisnik_id = table.Column<int>(type: "int", nullable: true),
+                    Kolicina = table.Column<int>(type: "int", nullable: false),
+                    meni_id = table.Column<int>(type: "int", nullable: true),
+                    kartica_id = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Dostava", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Dostava_Kartica_kartica_id",
+                        column: x => x.kartica_id,
+                        principalTable: "Kartica",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Dostava_Korisnik_korisnik_id",
                         column: x => x.korisnik_id,
@@ -309,31 +342,28 @@ namespace HusinKonak.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DostavaMeni",
+                name: "Korpa",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Kolicina = table.Column<int>(type: "int", nullable: false),
-                    Cijena = table.Column<float>(type: "real", nullable: false),
-                    meni_id = table.Column<int>(type: "int", nullable: false),
-                    dostava_id = table.Column<int>(type: "int", nullable: false)
+                    meni_id = table.Column<int>(type: "int", nullable: true),
+                    korisnik_id = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DostavaMeni", x => x.Id);
+                    table.PrimaryKey("PK_Korpa", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DostavaMeni_Dostava_dostava_id",
-                        column: x => x.dostava_id,
-                        principalTable: "Dostava",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_Korpa_Korisnik_korisnik_id",
+                        column: x => x.korisnik_id,
+                        principalTable: "Korisnik",
+                        principalColumn: "ID");
                     table.ForeignKey(
-                        name: "FK_DostavaMeni_Meni_meni_id",
+                        name: "FK_Korpa_Meni_meni_id",
                         column: x => x.meni_id,
                         principalTable: "Meni",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -347,19 +377,14 @@ namespace HusinKonak.Data.Migrations
                 column: "KorisnickiNalogId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Dostava_kartica_id",
+                table: "Dostava",
+                column: "kartica_id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Dostava_korisnik_id",
                 table: "Dostava",
                 column: "korisnik_id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_DostavaMeni_dostava_id",
-                table: "DostavaMeni",
-                column: "dostava_id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_DostavaMeni_meni_id",
-                table: "DostavaMeni",
-                column: "meni_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ForumOdgovor_forumTema_id",
@@ -387,6 +412,16 @@ namespace HusinKonak.Data.Migrations
                 column: "gradid");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Korpa_korisnik_id",
+                table: "Korpa",
+                column: "korisnik_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Korpa_meni_id",
+                table: "Korpa",
+                column: "meni_id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_LogKretanjePoSistemu_korisnikID",
                 table: "LogKretanjePoSistemu",
                 column: "korisnikID");
@@ -407,7 +442,7 @@ namespace HusinKonak.Data.Migrations
                 name: "AutentifikacijaToken");
 
             migrationBuilder.DropTable(
-                name: "DostavaMeni");
+                name: "Dostava");
 
             migrationBuilder.DropTable(
                 name: "ForumOdgovor");
@@ -419,13 +454,13 @@ namespace HusinKonak.Data.Migrations
                 name: "Kontakt");
 
             migrationBuilder.DropTable(
+                name: "Korpa");
+
+            migrationBuilder.DropTable(
                 name: "LogKretanjePoSistemu");
 
             migrationBuilder.DropTable(
-                name: "Dostava");
-
-            migrationBuilder.DropTable(
-                name: "Meni");
+                name: "Kartica");
 
             migrationBuilder.DropTable(
                 name: "ForumTema");
@@ -434,13 +469,16 @@ namespace HusinKonak.Data.Migrations
                 name: "Korisnik");
 
             migrationBuilder.DropTable(
-                name: "Kategorija");
+                name: "Meni");
 
             migrationBuilder.DropTable(
                 name: "Grad");
 
             migrationBuilder.DropTable(
                 name: "KorisnickiNalog");
+
+            migrationBuilder.DropTable(
+                name: "Kategorija");
 
             migrationBuilder.DropTable(
                 name: "Drzava");

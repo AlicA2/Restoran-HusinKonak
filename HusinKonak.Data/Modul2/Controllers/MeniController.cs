@@ -83,6 +83,36 @@ namespace HusinKonak.Data.Modul2.Controllers
                 return StatusCode(500, $"Greška prilikom dohvatanja meni-a: {ex.Message}");
             }
         }
+        [HttpGet("{id}")]
+        public ActionResult<MeniGetVM> GetById(int id)
+        {
+            try
+            {
+                var meni = _dbContext.Meni
+                    .Where(k => k.Id == id)
+                    .Select(k => new MeniGetVM
+                    {
+                        Id = k.Id,
+                        Naziv = k.Naziv,
+                        Opis = k.Opis,
+                        Cijena = k.Cijena,
+                        kategorija_id = k.kategorija_id,
+                        SlikaBase64 = Convert.ToBase64String(k.Slika) 
+            })
+                    .FirstOrDefault();
+
+                if (meni == null)
+                {
+                    return NotFound(); 
+                }
+
+                return Ok(meni);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Greška prilikom dohvatanja meni-a: {ex.Message}");
+            }
+        }
         [HttpDelete("{id}")]
         public ActionResult DeleteMeni(int id)
         {
