@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HusinKonak.Data.Migrations
 {
     [DbContext(typeof(RestaurantDBContext))]
-    [Migration("20231026101543_test")]
-    partial class test
+    [Migration("20231102114855_prepravljeno")]
+    partial class prepravljeno
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -441,6 +441,40 @@ namespace HusinKonak.Data.Migrations
                     b.HasIndex("kategorija_id");
 
                     b.ToTable("Meni");
+                });
+
+            modelBuilder.Entity("HusinKonak.Data.Modul2.Models.Rezervacija", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("BrojOsoba")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DatumRezervacije")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Ime")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Prezime")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Rezervisano")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("Vrijeme")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Rezervacije");
                 });
 
             modelBuilder.Entity("Kontakt", b =>

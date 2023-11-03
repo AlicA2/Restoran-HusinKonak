@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HusinKonak.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class test : Migration
+    public partial class prva : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
