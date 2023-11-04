@@ -463,13 +463,19 @@ namespace HusinKonak.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Rezervisano")
-                        .HasColumnType("bit");
+                    b.Property<string>("Rezervisano")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Vrijeme")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("korisnik_id")
+                        .HasColumnType("int");
+
                     b.HasKey("ID");
+
+                    b.HasIndex("korisnik_id");
 
                     b.ToTable("Rezervacije");
                 });
@@ -684,6 +690,15 @@ namespace HusinKonak.Data.Migrations
                         .HasForeignKey("kategorija_id");
 
                     b.Navigation("kategorija");
+                });
+
+            modelBuilder.Entity("HusinKonak.Data.Modul2.Models.Rezervacija", b =>
+                {
+                    b.HasOne("HusinKonak.Data.Modul2.Models.Korisnik", "korisnik")
+                        .WithMany()
+                        .HasForeignKey("korisnik_id");
+
+                    b.Navigation("korisnik");
                 });
 
             modelBuilder.Entity("Kontakt", b =>

@@ -13,6 +13,8 @@ namespace HusinKonak.Data.ViewModels
         public DateTime Vrijeme { get; set; }
         public string Prezime { get; set; }
         public string BrojOsoba { get; set; }
-        public bool Rezervisano { get; set; }
+        public string Rezervisano { get; set; }
+        public int? korisnik_id { get; set; }
+
     }
 }

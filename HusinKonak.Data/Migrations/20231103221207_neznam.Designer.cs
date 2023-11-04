@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HusinKonak.Data.Migrations
 {
     [DbContext(typeof(RestaurantDBContext))]
-    [Migration("20231102114346_RezervacijaAdded")]
-    partial class RezervacijaAdded
+    [Migration("20231103221207_neznam")]
+    partial class neznam
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -466,15 +466,21 @@ namespace HusinKonak.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Rezervisano")
-                        .HasColumnType("bit");
+                    b.Property<string>("Rezervisano")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Vrijeme")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("korisnik_id")
+                        .HasColumnType("int");
+
                     b.HasKey("ID");
 
-                    b.ToTable("Rezervacija");
+                    b.HasIndex("korisnik_id");
+
+                    b.ToTable("Rezervacije");
                 });
 
             modelBuilder.Entity("Kontakt", b =>
@@ -687,6 +693,15 @@ namespace HusinKonak.Data.Migrations
                         .HasForeignKey("kategorija_id");
 
                     b.Navigation("kategorija");
+                });
+
+            modelBuilder.Entity("HusinKonak.Data.Modul2.Models.Rezervacija", b =>
+                {
+                    b.HasOne("HusinKonak.Data.Modul2.Models.Korisnik", "korisnik")
+                        .WithMany()
+                        .HasForeignKey("korisnik_id");
+
+                    b.Navigation("korisnik");
                 });
 
             modelBuilder.Entity("Kontakt", b =>

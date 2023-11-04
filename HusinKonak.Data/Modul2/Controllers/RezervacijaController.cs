@@ -18,6 +18,14 @@ namespace HusinKonak.Data.Modul2.Controllers
         {
             _dbContext = dbContext;
         }
+        private bool DaLiJeDostignutMaksimum(DateTime datumRezervacije, DateTime vrijeme)
+        {
+            var brojRezervacija = _dbContext.Rezervacije
+                .Where(r => r.DatumRezervacije.Date == datumRezervacije.Date && r.Vrijeme == vrijeme)
+                .Count();
+
+            return brojRezervacija >= 3;
+        }
 
 
         [HttpPost]
@@ -30,6 +38,13 @@ namespace HusinKonak.Data.Modul2.Controllers
 
             try
             {
+                DateTime datumRezervacije = novaRezervacija.DatumRezervacije;
+                DateTime vrijeme = novaRezervacija.Vrijeme;
+
+                if (DaLiJeDostignutMaksimum(datumRezervacije, vrijeme))
+                {
+                    return BadRequest("Dostignut je maksimalni broj rezervacija za odabrani datum i vrijeme.");
+                }
                 Models.Rezervacija rezervacija = new Models.Rezervacija
                 {
                     Ime=novaRezervacija.Ime,
@@ -37,7 +52,8 @@ namespace HusinKonak.Data.Modul2.Controllers
                     DatumRezervacije=novaRezervacija.DatumRezervacije,
                     BrojOsoba=novaRezervacija.BrojOsoba,
                     Vrijeme=novaRezervacija.Vrijeme,
-                    Rezervisano=novaRezervacija.Rezervisano
+                    Rezervisano=novaRezervacija.Rezervisano,
+                    korisnik_id=novaRezervacija.korisnik_id
                 };
                 _dbContext.Rezervacije.Add(rezervacija);
                 _dbContext.SaveChanges();
@@ -103,7 +119,7 @@ namespace HusinKonak.Data.Modul2.Controllers
             return Ok(new { message = $"Rezervacija sa ID-om {id} uspjesno obrisana." });
         }
         [HttpPut("{id}")]
-        public IActionResult UpdateRezervisano(int id, [FromBody] bool rezervisano)
+        public IActionResult UpdateRezervisano(int id, [FromBody] RezervacijaUpdateVM updateVM)
         {
             try
             {
@@ -114,16 +130,18 @@ namespace HusinKonak.Data.Modul2.Controllers
                     return NotFound($"Rezervacija with ID {id} not found.");
                 }
 
-                rezervacija.Rezervisano = rezervisano;
+                rezervacija.Rezervisano = updateVM.Rezervisano; // Postavite Rezervisano prema vrijednosti iz RezervacijaUpdateVM
+
                 _dbContext.Rezervacije.Update(rezervacija);
                 _dbContext.SaveChanges();
 
-                return Ok(new { message = $"Rezervisano status for Rezervacija with ID {id} updated to {rezervisano}." });
+                return Ok(new { message = $"Rezervisano status for Rezervacija with ID {id} updated to {updateVM.Rezervisano}." });
             }
             catch (Exception ex)
             {
                 return StatusCode(500, $"Error updating Rezervisano status: {ex.Message}");
             }
         }
+
     }
 }
