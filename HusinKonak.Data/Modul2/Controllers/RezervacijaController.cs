@@ -130,7 +130,7 @@ namespace HusinKonak.Data.Modul2.Controllers
                     return NotFound($"Rezervacija with ID {id} not found.");
                 }
 
-                rezervacija.Rezervisano = updateVM.Rezervisano; // Postavite Rezervisano prema vrijednosti iz RezervacijaUpdateVM
+                rezervacija.Rezervisano = updateVM.Rezervisano; 
 
                 _dbContext.Rezervacije.Update(rezervacija);
                 _dbContext.SaveChanges();

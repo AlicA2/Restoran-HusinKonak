@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HusinKonak.Data.Migrations
 {
     [DbContext(typeof(RestaurantDBContext))]
-    [Migration("20231103210310_ispravka")]
-    partial class ispravka
+    [Migration("20231104110022_prvaMig")]
+    partial class prvaMig
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -466,8 +466,9 @@ namespace HusinKonak.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Rezervisano")
-                        .HasColumnType("bit");
+                    b.Property<string>("Rezervisano")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Vrijeme")
                         .HasColumnType("datetime2");

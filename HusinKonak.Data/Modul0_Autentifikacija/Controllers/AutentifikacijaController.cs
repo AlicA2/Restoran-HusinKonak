@@ -30,8 +30,6 @@ namespace HusinKonak.Data.Modul0_Autentifikacija.Controllers
                 return BadRequest("Korisnik nije autentificiran");
             }
 
-            // Ovdje dodajte logiku za spremanje kontakta u bazu podataka
-
             return Ok(new { message = "Kontakt je uspješno poslan." });
         }
 
@@ -60,22 +58,18 @@ namespace HusinKonak.Data.Modul0_Autentifikacija.Controllers
         [HttpPost]
         public ActionResult<MyAuthTokenExtension.LoginInformacije> Login([FromBody] LoginVM x)
         {
-            //1- provjera logina
             KorisnickiNalog? logiraniKorisnik = _dbContext.KorisnickiNalog
                 .FirstOrDefault(k =>
                 k.KorisnickoIme == x.korisnickoIme && k.Lozinka == x.lozinka);
 
             if (logiraniKorisnik == null)
             {
-                //pogresan username i password
                 return new MyAuthTokenExtension.LoginInformacije(null);
             }
 
-            //2- generisati random string
             string randomString = TokenGenerator.Generate(10);
             string twoFCode = TokenGenerator.Generate(4);
 
-            //3- dodati novi zapis u tabelu AutentifikacijaToken za logiraniKorisnikId i randomString
             var noviToken = new AutentifikacijaToken()
             {
                 ipAdresa = Request.HttpContext.Connection.RemoteIpAddress?.ToString(),
@@ -91,12 +85,10 @@ namespace HusinKonak.Data.Modul0_Autentifikacija.Controllers
 
             try
             {
-                // Your SMTP email sending code here
                 EmailLog.uspjesnoLogiranKorisnik(noviToken, Request.HttpContext);
             }
             catch (System.Net.Mail.SmtpException smtpEx)
             {
-                // Handle the SMTP exception here, you can log the error or take appropriate action
                 Console.WriteLine("SMTP Exception: " + smtpEx.Message);
             }
 

@@ -1,7 +1,7 @@
 ﻿using HusinKonak.Data.Modul2.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations; // Import this namespace
+using System.ComponentModel.DataAnnotations;
 
 namespace HusinKonak.Data.ViewModels
 {

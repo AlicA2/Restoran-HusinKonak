@@ -39,7 +39,6 @@ namespace HusinKonak.Data.Modul2.Controllers
         }
 
         [HttpGet]
-        //[Autorizacija(false, true)]
         public ActionResult<List<KorisnikGetVM>> GetAll()
         {
             var data = _dbContext.Korisnik
@@ -83,7 +82,6 @@ namespace HusinKonak.Data.Modul2.Controllers
         }
 
         [HttpPost]
-        //[Autorizacija(false, true)] //admin dodaje korisnike
         public ActionResult Snimi([FromBody] KorisnikAddVM x)
         {
             Korisnik? korisnik;
@@ -109,7 +107,7 @@ namespace HusinKonak.Data.Modul2.Controllers
             korisnik.KorisnickoIme = x.korisnickoIme;
             korisnik.Lozinka = x.lozinka;
 
-            //provjera da li postoje korsnici koji imaju isto korIme i lozinku
+
 
             if (x.id == 0)
             {
@@ -136,7 +134,6 @@ namespace HusinKonak.Data.Modul2.Controllers
         }
 
         [HttpPost("{id}")]
-        //[Autorizacija(false, true)]
         public ActionResult Obrisi(int id)
         {
             Korisnik? korisnik = _dbContext.Korisnik.Find(id);

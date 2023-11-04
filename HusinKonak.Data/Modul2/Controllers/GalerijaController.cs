@@ -22,18 +22,6 @@ namespace HusinKonak.Data.Modul2.Controllers
             this._dbContext = dbContext;
         }
 
-
-        //[HttpGet]
-        //public ActionResult GetAllSlike()
-        //{
-        //    var slike = _dbContext.Galerija.ToList();
-        //    if (slike == null)
-        //        throw new Exception("Slike nisu pronađene.");
-
-        //    var bajtoviSlika = slike.Select(slika => slika.slika).ToList();
-
-        //    return File(Fajlovi.ConcatenateByteArrays(bajtoviSlika), "image/png");
-        //}
         [HttpGet]
         public ActionResult<IEnumerable<string>> GetAllSlike()
         {
@@ -62,7 +50,6 @@ namespace HusinKonak.Data.Modul2.Controllers
 
 
         [HttpPost]
-        //[Autorizacija(false, true)]
         public ActionResult DodajSliku([FromBody] GalerijaAddVM x)
         {
             if (!string.IsNullOrEmpty(x.novaSlika))
@@ -83,7 +70,6 @@ namespace HusinKonak.Data.Modul2.Controllers
         }
 
         [HttpDelete("{id}")]
-        //[Autorizacija(false, true)]
         public ActionResult DeleteSlika(int id)
         {
             var slika = _dbContext.Galerija.FirstOrDefault(s => s.ID == id);

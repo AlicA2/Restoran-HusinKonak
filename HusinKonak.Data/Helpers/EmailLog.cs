@@ -36,14 +36,13 @@ namespace HusinKonak.Data.Helpers
         {
             if (!korisnik.isAktiviran)
             {
-                // iz requesta saznamo adresu servera
                 var Request = httpContext.Request;
                 var location = $"{Request.Scheme}://{Request.Host}";
 
 
                 string url = location + "/korisnik/Aktivacija/" + korisnik.aktivacijaGUID;
                 string poruka = $"Postovani/a {korisnik.Ime}, <br> Link za aktivaciju <a href='{url}'>{url}</a>... {DateTime.Now}";
-                //slanje maila pri aktivaciji korisnika
+
                 EmailSender.Posalji(korisnik.Email, "Aktivacija korisnika", poruka, true);
 
             }

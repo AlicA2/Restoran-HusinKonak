@@ -67,7 +67,6 @@ namespace HusinKonak.Data.Modul2.Controllers
                 }
 
                 _dbContext.Add(admin);
-                //provjeriti da ne postoje dva ista korisnicka imena i lozinke
             }
 
 
