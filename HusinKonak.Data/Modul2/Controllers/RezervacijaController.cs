@@ -142,6 +142,21 @@ namespace HusinKonak.Data.Modul2.Controllers
                 return StatusCode(500, $"Error updating Rezervisano status: {ex.Message}");
             }
         }
+        [HttpGet("GetByKorisnikId/{korisnikId}")]
+        public async Task<ActionResult<IEnumerable<int>>> GetRezervacijaIdsByKorisnikId(int korisnikId)
+        {
+            try
+            {
+                var rezervacijaIds = await _dbContext.Rezervacije
+                    .Where(r => r.korisnik_id == korisnikId)
+                    .ToListAsync();
 
+                return Ok(rezervacijaIds);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error retrieving Rezervacija IDs for Korisnik ID {korisnikId}: {ex.Message}");
+            }
+        }
     }
 }
